@@ -97,6 +97,18 @@ router.delete('/:id', isLoggedIn, getDrugsById, async (req,res) => {
     };
 });
 
+// app.get('/search', async (req, res) => {
+//     try {
+//         const searchQuery = req.query.search.trim();
+//         const searchResult = await Drug.find({name: {$regex: new RegExp('*'+searchQuery+'.*','i')}}).exec();
+//         const searchPayload = searchResult.slice(0, 10);
+//         res.json({payload: searchPayload});
+//     } catch (err) {
+//         console.log(err);
+//         res.status(500).json({error: true, message: "internal server error"})
+//     }
+// })
+
 //Middlewares
 //Find database by Id
 async function getDrugsById (req, res, next) {
@@ -108,7 +120,7 @@ async function getDrugsById (req, res, next) {
         }
         res.drug = drug;
     } catch (err) {
-        res.status(500).json({message: err.message})
+        res.status(500).json({err})
     }
 next();
 };
@@ -128,4 +140,5 @@ async function searchDrugs (req, res, next) {
     }
 next();
 };
+
 module.exports = router;

@@ -1,19 +1,26 @@
 require('dotenv').config()
 const express = require('express');
 const dbConnect = require('./dbConnect');
+const session = require('express-session');
+const passport = require('passport');
+const LocalStrategy = require('passport-local');
+const Admin = require('./models/admin')
+
 const app = express();
 
+const drugRouter = require('./routes/drugs')
+const adminRouter = require('./routes/admin')
 
 dbConnect();
 
 const sessionConfig = {
-    secret: 'sfsfwefccwrejhjk',
+    secret: 'non ono no no non  no',
     resave: false,
     saveUninitialized: false,
     cookie: {
         httpOnly: true,
-        expires: Date.now() + 1000 * 60 * 60 * 24 * 180,
-        maxAge: 1000 * 60 * 60 * 24 * 180
+        expires: Date.now() + 1000 * 60 * 60 * 24,
+        maxAge: 1000 * 60 * 60 * 24 
     }
 }
 
@@ -25,32 +32,30 @@ const corsOptions = {
 
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
+app.use(session(sessionConfig));
+
+// Authentication
+
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(Admin.authenticate()));
+
+passport.serializeUser(Admin.serializeUser());
+passport.deserializeUser(Admin.deserializeUser());
 
 
 // Routes
-const drugRouter = require('./routes/drugs')
-const adminRouter = require('./routes/admins')
-
-app.use('/drugs', drugRouter)
 app.use('/admin', adminRouter)
+app.use('/drugs', drugRouter)
+
+
 
 app.get('/', (req,res) => {
     res.json({message: "welcome"})
 })
 
 
-// app.get('/search', async (req, res) => {
-//     try {
-//         const searchQuery = req.query.search.trim();
-//         const searchResult = await Drug.find({name: {$regex: new RegExp('*'+searchQuery+'.*','i')}}).exec();
-//         const searchPayload = searchResult.slice(0, 10);
-//         res.json({payload: searchPayload});
-//     } catch {
-//         console.log(err);
-//         res.status(500).json({error: true, message: "internal server error"})
-//     }
-// })
-
+// Remaining catch all express methods
 app.get('*', (req,res) => {
     res.status(404).json({message: "sorry we can't find it"}); 
 })
