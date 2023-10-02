@@ -11,7 +11,8 @@ const drugSchema = new mongoose.Schema({
     contraindication: {type: String, required: true},
     manufacturer: {type: Array, required: true},
     pregnancyCategory: {type: String, required: true},
-    lactationSafety: {type: String, required: true}
+    lactationSafety: {type: String, required: true},
+    lastUpdated: {type: Date, required: true}
 });
 
 module.exports = mongoose.model("drugs", drugSchema)

@@ -2,12 +2,10 @@ export default function Form() {
     return (
         <>
         <form>
-            <label name="drugname">Drug Name</label>
-            <label name="manufacturer">Drug Name</label>
-            <label name="composition">Drug Name</label>
-            <label name="drugname">Drug Name</label>
-            <label name="drugname">Drug Name</label>
-            <label name="drugname">Drug Name</label>
+            <label htmlFor="drugname">Drug Name</label>
+            <input name="drugname" type="text"/>
+            <label htmlFor="manufacturer">Drug Name</label>
+            <label htmlFor="composition">Drug Name</label>
         </form>
         </>
     )

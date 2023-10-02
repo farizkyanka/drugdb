@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const DATABASE_URL = 'mongodb://127.0.0.1:27017/drugs'
 
 const dbConnect = () => {
+    mongoose.set('strictQuery', true)
     mongoose.connect(process.env.DATABASE_URL);
     mongoose.connection.on("error", (err) => {
         console.log("error while connecting to database:" + err)

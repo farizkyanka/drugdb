@@ -24,12 +24,6 @@ const sessionConfig = {
     }
 }
 
-const corsOptions = {
-    origin: "http://localhost:5000",
-    credentials: true,
-    "Access-Control-Allow-Credentials": true
-}
-
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
 app.use(session(sessionConfig));

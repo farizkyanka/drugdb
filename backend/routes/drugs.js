@@ -33,7 +33,8 @@ router.post('/', isLoggedIn, async (req,res) => {
         contraindication: req.body.contraindication,
         manufacturer: req.body.manufacturer,
         pregnancyCategory:  req.body.pregnancyCategory,
-        lactationSafety: req.body.lactationSafety
+        lactationSafety: req.body.lactationSafety,
+        lastUpdated: new Date()
     });
     try {
         const newDrug = await drug.save();
@@ -79,6 +80,7 @@ router.put('/:id', isLoggedIn, getDrugsById, async (req,res) => {
     if (req.body.lactationSafety != null) {
         res.drug.lactationSafety = req.body.lactationSafety
     };
+    res.drug.lastUpdated = new Date();
     try {
         const updatedDrug = await res.drug.save();
         res.json(updatedDrug)

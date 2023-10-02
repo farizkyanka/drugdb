@@ -4,6 +4,8 @@ import Home from './Pages/Home';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Content from './components/Content';
 import DataModel from './models/DataModel';
+import Login from './components/Login';
+import Register from './components/Register';
 
 const dummy_content: DataModel = {
   id: "n123",
@@ -28,12 +30,17 @@ const router = createBrowserRouter([{
   element: <RootLayout/>,
   children: [
     {index: true, element: <Home/>},
-    {path: ':drugname', element: <Content items={dummy_content}/>}
+    {path: ':drugId', element: <Content items={dummy_content}/>}
   ]
-}])
+},{
+    path: '/admin',
+   children: [
+    {path: 'login', element: <Login/>},
+    {path: 'register', element: <Register/>},
+   ]}])
 
 function App() {
   return <RouterProvider router={router}/>
-};
+}
 
 export default App;
