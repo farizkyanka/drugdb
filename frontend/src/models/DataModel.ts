@@ -1,16 +1,16 @@
 export default interface DataModel {
-  id: String;
+  id: string;
   img: string;
-  name: String;
-  composition: String;
-  form: String;
-  category: String;
-  pregnancyCategory: String;
-  lactationSafety: String;
-  manufacturer: String[];
-  dose: String;
-  indications: String;
-  contraIndications: String;
-  adverseEffects: String;
+  name: string;
+  composition: string;
+  form: string;
+  category: string;
+  pregnancyCategory: string;
+  lactationSafety: string;
+  manufacturer: string[];
+  dose: string;
+  indication: string;
+  contraindication: string;
+  adverseEffects: string;
   interactions: string[];
 }

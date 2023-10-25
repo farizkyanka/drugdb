@@ -5,6 +5,7 @@ const session = require('express-session');
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const Admin = require('./models/admin')
+const cors = require('cors')
 
 const app = express();
 
@@ -12,6 +13,8 @@ const drugRouter = require('./routes/drugs')
 const adminRouter = require('./routes/admin')
 
 dbConnect();
+
+app.use(cors())
 
 const sessionConfig = {
     secret: 'non ono no no non  no',

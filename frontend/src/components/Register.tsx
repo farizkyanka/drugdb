@@ -18,3 +18,23 @@ export default function Register() {
     </div>
     </>
 }
+
+interface RegisterProps {
+    request: {
+        formData: () => {
+            get: (arg0: string) => void
+        },
+        email: string,
+        username: string,
+        password: string
+    }
+}
+
+export async function action({request}: RegisterProps) {
+    const data = await request.formData()
+    const authData = {
+        email: data.get('email'),
+        username: data.get('username'),
+        password: data.get('password')
+    }
+}
