@@ -5,7 +5,7 @@ const Content = () => {
   const item = useLoaderData() as DataModel
   return (
     <>
-       <section className="container max-w-screen-lg m-10 mx-auto text-gray ">
+       <section className="container max-w-screen-lg m-10 mx-auto text-gray">
         <div className="grid sm:grid-cols-12 text-center">
           <div className="sm:col-span-3 justify-center text-center p-10">
             <img src={item.img} className="w-full" />

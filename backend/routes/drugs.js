@@ -14,6 +14,26 @@ router.get('/', async (req,res) => {
     }
 });
 
+router.get('/search', async (req, res) => {
+    try {
+        const searchQuery = req.query.prompt.trim().toLowerCase();
+        const searchResult = await Drug.find({
+            $or: [
+                {name: searchQuery},
+                {composition: searchQuery},
+                {indication: searchQuery}
+            ]});
+        const searchPayload = searchResult.slice(0, 10);
+        return res.json({searchPayload});
+    } catch (err) {
+        if (err === CastError) {
+            return
+        } else {
+            return res.status(500).json({err})
+        }
+    }
+})
+
 //Get one item
 router.get('/:id', getDrugsById, (req,res) => {
     res.send(res.drug)
@@ -98,18 +118,6 @@ router.delete('/:id', isLoggedIn, getDrugsById, async (req,res) => {
         res.status(500).json({message: err.message})
     };
 });
-
-// app.get('/search', async (req, res) => {
-//     try {
-//         const searchQuery = req.query.search.trim();
-//         const searchResult = await Drug.find({name: {$regex: new RegExp('*'+searchQuery+'.*','i')}}).exec();
-//         const searchPayload = searchResult.slice(0, 10);
-//         res.json({payload: searchPayload});
-//     } catch (err) {
-//         console.log(err);
-//         res.status(500).json({error: true, message: "internal server error"})
-//     }
-// })
 
 //Middlewares
 //Find database by Id

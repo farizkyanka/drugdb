@@ -1,4 +1,20 @@
+import { useState } from "react"
+
 export default function Navbar() {
+
+  const [query, setQuery] = useState('');
+
+  async function fetchQuery (query: string) {
+    await fetch('localhost:5050/get?' + query)
+  }
+
+  function handleChange(value: string){
+    setQuery(value);
+    fetchQuery(value);
+  }
+
+  console.log(query)
+  
   return (
     <>
       <header className="w-full bg-white text-sm py-4 dark:bg-gray-800">
@@ -34,8 +50,9 @@ export default function Navbar() {
                 type="search"
                 id="default-search"
                 className="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder="Search Mockups, Logos..."
-                required
+                placeholder="Search"
+                value={query}
+                onChange={(e) => handleChange(e.target.value)}
               ></input>
               <button
                 type="submit"
@@ -43,6 +60,9 @@ export default function Navbar() {
               >
                 Search
               </button>
+            </div>
+            <div>
+
             </div>
           </form>
         </nav>
