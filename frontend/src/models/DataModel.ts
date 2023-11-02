@@ -1,5 +1,5 @@
 export default interface DataModel {
-  id: string;
+  _id: string;
   img: string;
   name: string;
   composition: string;

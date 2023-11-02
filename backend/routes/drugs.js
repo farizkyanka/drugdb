@@ -19,19 +19,15 @@ router.get('/search', async (req, res) => {
         const searchQuery = req.query.prompt.trim().toLowerCase();
         const searchResult = await Drug.find({
             $or: [
-                {name: searchQuery},
-                {composition: searchQuery},
-                {indication: searchQuery}
+                {name: {$regex: searchQuery}},
+                {composition: {$regex: searchQuery}},
+                {indication: {$regex: searchQuery}}
             ]});
         const searchPayload = searchResult.slice(0, 10);
-        return res.json({searchPayload});
+        return res.json(searchPayload);
     } catch (err) {
-        if (err === CastError) {
-            return
-        } else {
-            return res.status(500).json({err})
+          return res.status(404).json([err])
         }
-    }
 })
 
 //Get one item

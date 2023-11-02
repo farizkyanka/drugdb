@@ -23,8 +23,8 @@ const Content = () => {
             <h3 className="w-full">
               <span className="font-bold">Manufacturer: </span>
               <ul>
-                {item.manufacturer.map(manufacture => (
-                  <li className="bg-blue-400 inline m-2 px-2 rounded text-white">
+                {item.manufacturer.map((manufacture, index) => (
+                  <li className="bg-blue-400 inline m-2 px-2 rounded text-white" key={index}>
                     {manufacture}
                   </li>
                 ))}
