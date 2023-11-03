@@ -80,15 +80,3 @@ export const contentLoader = async ({params}:{params: any}) => {
 }
 
 export default Content;
-// {props.items.img}-
-// {props.items.name}-
-// {props.items.composition}-
-// {props.items.form}-
-// {props.items.category}-
-// {props.items.manufacturer}-
-// {props.items.indications}-
-// {props.items.dose}-
-// {props.items.pregnancyCategory}-
-// {props.items.lactationSafety}-
-// {props.items.contraIndications}-
-// {props.items.adverseEffects}-

@@ -21,7 +21,7 @@ router.post('/register', async(req,res) => {
 })
 
 router.post('/login', passport.authenticate('local', 
-{failureFlash: true}), 
+{failureFlash: false}), 
 (req,res) => {
     res.json({message: "Logged in"})
 });

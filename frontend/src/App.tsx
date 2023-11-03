@@ -3,7 +3,7 @@ import RootLayout from './Pages/RootLayout';
 import Home from './Pages/Home';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Content, { contentLoader } from './Pages/Content';
-import Login from './components/Login';
+import Login, { actionLogin } from './components/Login';
 import Register from './components/Register';
 // import DataModel from './models/DataModel';
 
@@ -16,7 +16,7 @@ const router = createBrowserRouter([{
 },{
     path: '/admin',
    children: [
-    {path: 'login', element: <Login/>},
+    {path: 'login', element: <Login/>, action: actionLogin},
     {path: 'register', element: <Register/>},
    ]}])
 
