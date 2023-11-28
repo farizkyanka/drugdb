@@ -1,4 +1,5 @@
 import { redirect, Form, json } from "react-router-dom"
+import type { ActionFunction } from "react-router"
 
 export default function Login() {
     return <>
@@ -17,16 +18,8 @@ export default function Login() {
     </>
 }
 
-interface PropsType {
-    request: {
-        formData: () => object
-        username: string,
-        password: string
-    },
-    params : string
-}
 
-export async function actionLogin({request, params}: PropsType) {
+export const actionLogin: ActionFunction = async ({request}) => {
     const data = await request.formData()
     const authData = {
         username : data.get('username'),

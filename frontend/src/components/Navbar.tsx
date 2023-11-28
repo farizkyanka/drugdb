@@ -16,7 +16,6 @@ export default function Navbar() {
     });
     const data = await response.json()
     setSearchResult(data)
-    console.log(data)
   }
 
   function handleChange(value: string){
@@ -52,8 +51,8 @@ export default function Navbar() {
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                     d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
                   ></path>
                 </svg>
@@ -64,14 +63,12 @@ export default function Navbar() {
                 className="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="Search"
                 value={query}
-                onChange={(e) => handleChange(e.target.value.toString())}
-              ></input>
+                onChange={(e) => handleChange(e.target.value.toString())}/>
             <div className="w-full absolute border border-gray-800 bg-white rounded-b">
             {query && query.length > 0 && searchResult.map((data: DataModel) => {
-              return (<Link to={`/${data._id}`}>
+              return (<Link to={`/drugs/${data._id}`} key={data._id}>
                 <div className="hover:bg-blue-500 hover:text-white p-1 flex" 
-                     onClick={() => handleClick()}
-                     key={data._id}>
+                     onClick={() => handleClick()}>
                 <img src={data.img} className="max-w-10 max-h-10 display-inline rounded"/>
                   <h6 className="m-1">{data.name}</h6>
               </div></Link>

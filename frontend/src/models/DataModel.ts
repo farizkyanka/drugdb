@@ -7,10 +7,10 @@ export default interface DataModel {
   category: string;
   pregnancyCategory: string;
   lactationSafety: string;
-  manufacturer: string[];
+  manufacturer: [];
   dose: string;
   indication: string;
   contraindication: string;
   adverseEffects: string;
-  interactions: string[];
+  interactions: [];
 }

@@ -1,5 +1,6 @@
 import DataModel from '../models/DataModel';
-import { useLoaderData } from 'react-router-dom';
+import { useLoaderData, Link, Form, json, redirect } from 'react-router-dom';
+import type { ActionFunction } from 'react-router-dom';
 
 const Content = () => {
   const item = useLoaderData() as DataModel
@@ -62,8 +63,20 @@ const Content = () => {
               <p className="font-bold">Adverse Effects: </p>
               <p>{item.adverseEffects}</p>
             </div>
+          <div className="w-full m-3">
+              <p className='font-bold'>Interactions: </p>
+              <p>
+                {item.interactions}
+              </p>
+            </div>
           </div>
         </div>
+        <Link to={`../admin/edit-drug/${item._id}`}>
+          <button className='bg-blue border border-r-2'>Edit Drug</button>
+        </Link>
+        <Form method="delete">
+          <button className='bg-blue border border-r-2'>Delete Drug</button>
+        </Form>
       </section>
     </>
   );
@@ -77,6 +90,23 @@ export const contentLoader = async ({params}:{params: any}) => {
     }
   })
   return response
+}
+
+export const actionDeleteDrug: ActionFunction = async ({request, params}) => {
+  const response = await fetch('http://localhost:5000/drugs/' + params.drugId, {
+    method: 'delete',
+    headers: {'content-type': 'application/json'}
+})
+
+  const data = await response.json()
+  console.log(data)
+
+  if (!response.ok) {
+    throw json({message: 'error'}, {status: 500})
+}
+
+return redirect('/')
+
 }
 
 export default Content;

@@ -37,7 +37,7 @@ router.get('/:id', getDrugsById, (req,res) => {
 
 //Create one item
 router.post('/', isLoggedIn, async (req,res) => {
-    console.log(req.body.name)
+    try {
     const drug = new Drug({
         name: req.body.name,
         img: req.body.img,
@@ -50,6 +50,8 @@ router.post('/', isLoggedIn, async (req,res) => {
         manufacturer: req.body.manufacturer,
         pregnancyCategory:  req.body.pregnancyCategory,
         lactationSafety: req.body.lactationSafety,
+        interactions: req.body.interactions,
+        adverseEffects: req.body.adverseEffects,
         lastUpdated: new Date()
     });
     try {
@@ -58,11 +60,13 @@ router.post('/', isLoggedIn, async (req,res) => {
     } catch (err) {
         res.status(400).json({message: err.message})
     }
-
+    } catch (err) {
+	res.json(err)
+	}
 });
 
 //Edit one item
-router.put('/:id', isLoggedIn, getDrugsById, async (req,res) => {
+router.patch('/:id', isLoggedIn, getDrugsById, async (req,res) => {
     if (req.body.name != null) {
         res.drug.name = req.body.name
     };
@@ -96,6 +100,12 @@ router.put('/:id', isLoggedIn, getDrugsById, async (req,res) => {
     if (req.body.lactationSafety != null) {
         res.drug.lactationSafety = req.body.lactationSafety
     };
+    if (req.body.interactions != null) {
+        res.drug.interactions = req.body.interactions
+    };
+    if (req.body.adverseEffects != null) {
+        res.drug.adverseEffects = req.body.adverseEffects
+    }; 
     res.drug.lastUpdated = new Date();
     try {
         const updatedDrug = await res.drug.save();
