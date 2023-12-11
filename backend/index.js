@@ -5,21 +5,25 @@ const session = require('express-session');
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const Admin = require('./models/admin')
-const cors = require('cors')
+const cors = require('cors');
+const cookieParser = require('cookie-parser');
 
 const app = express();
 
 const drugRouter = require('./routes/drugs')
-const adminRouter = require('./routes/admin')
+const adminRouter = require('./routes/admin');
 
 dbConnect();
 
-app.use(cors())
+app.use(cors(
+    {origin: process.env.CORS_ORIGIN_URL,
+    credentials: true}
+))
 
 const sessionConfig = {
-    secret: 'non ono no no non  no',
-    resave: false,
-    saveUninitialized: false,
+    secret: process.env.APP_SECRET,
+    resave: true,
+    saveUninitialized: true,
     cookie: {
         httpOnly: true,
         expires: Date.now() + 1000 * 60 * 60 * 24,
@@ -30,6 +34,7 @@ const sessionConfig = {
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
 app.use(session(sessionConfig));
+app.use(cookieParser(process.env.CORS_ORIGIN_URL))
 
 // Authentication
 

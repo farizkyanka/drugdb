@@ -1,5 +1,5 @@
 import { redirect, Form, json } from "react-router-dom"
-import type { ActionFunction } from "react-router"
+import type { ActionFunction } from "react-router";
 
 export default function Login() {
     return <>
@@ -28,9 +28,12 @@ export const actionLogin: ActionFunction = async ({request}) => {
 
     const response = await fetch('http://localhost:5000/admin/login', {
         method: 'POST',
-        headers: {'content-type': 'application/json'},
+        headers: {'content-type': 'application/json', 'accept': '*/*'},
+        credentials: "include",
         body: JSON.stringify(authData)
     })
+
+    console.log(response)
 
     if (!response.ok) {
         throw json({message: 'error'}, {status: 500})

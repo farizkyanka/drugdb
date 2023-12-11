@@ -24,8 +24,6 @@ export default function Navbar() {
     fetchQuery(stringify);
   }
 
-  function handleClick () {setQuery("")}
-
   return (
     <>
       <header className="w-full bg-white text-sm py-4 dark:bg-gray-800">
@@ -68,7 +66,7 @@ export default function Navbar() {
             {query && query.length > 0 && searchResult.map((data: DataModel) => {
               return (<Link to={`/drugs/${data._id}`} key={data._id}>
                 <div className="hover:bg-blue-500 hover:text-white p-1 flex" 
-                     onClick={() => handleClick()}>
+                     onClick={() => setQuery("")}>
                 <img src={data.img} className="max-w-10 max-h-10 display-inline rounded"/>
                   <h6 className="m-1">{data.name}</h6>
               </div></Link>
