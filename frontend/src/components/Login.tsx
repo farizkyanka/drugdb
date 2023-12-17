@@ -33,8 +33,6 @@ export const actionLogin: ActionFunction = async ({request}) => {
         body: JSON.stringify(authData)
     })
 
-    console.log(response)
-
     if (!response.ok) {
         throw json({message: 'error'}, {status: 500})
     }

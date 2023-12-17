@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { Link } from 'react-router-dom'
 import DataModel from "../models/DataModel";
+import Logout from "./Logout";
 
 export default function Navbar() {
 
@@ -74,6 +75,8 @@ export default function Navbar() {
             </div>
             </div>
           </form>
+
+          <Logout/>
         </nav>
       </header>
     </>

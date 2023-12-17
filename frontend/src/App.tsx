@@ -8,6 +8,7 @@ import NewDrug from './Pages/NewDrug';
 import EditDrug, { editLoader } from './Pages/EditDrug';
 import { actionForm } from './components/FormField'
 import ErrorPage from './Pages/ErrorPage';
+import { actionLogout } from './components/Logout';
 // import DataModel from './models/DataModel';
 
 const router = createBrowserRouter([{
@@ -15,11 +16,12 @@ const router = createBrowserRouter([{
   element: <RootLayout/>,
   children: [
     {index: true, element: <Home/>},
-    {path: '/drugs/:drugId', element: <Content/>, loader: contentLoader, action: actionDeleteDrug},
+    {path: '/drugs/:drugId', id: 'drug-id', element: <Content/>, loader: contentLoader, action: actionDeleteDrug},
     {
       path: '/admin',
       children: [
       {path: 'login', element: <Login/>, action: actionLogin},
+      {path: 'logout', action: actionLogout},
       // {path: 'register', element: <Register/>},
       {path: 'new-drug', element: <NewDrug/>, action: actionForm},
       {path: 'edit-drug/:drugId', element: <EditDrug/>, loader: editLoader, action: actionForm}

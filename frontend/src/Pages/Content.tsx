@@ -95,7 +95,8 @@ export const contentLoader = async ({params}:{params: any}) => {
 export const actionDeleteDrug: ActionFunction = async ({request, params}) => {
   const response = await fetch('http://localhost:5000/drugs/' + params.drugId, {
     method: 'delete',
-    headers: {'content-type': 'application/json'}
+    headers: {'content-type': 'application/json'},
+    credentials: 'include'
 })
 
   const data = await response.json()

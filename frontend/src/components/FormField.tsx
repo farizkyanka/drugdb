@@ -1,7 +1,6 @@
 import { json, redirect, Form } from "react-router-dom";
 import { ActionFunction } from "react-router-dom";
 import { FormEvent, useState } from "react";
-import Cookies from 'js-cookie'
 
 export default function FormField (
   {
@@ -101,7 +100,8 @@ export default function FormField (
               key={index} 
               name="manufacturers" 
               value={manufacture}
-              onClick={() => {deleteMfrItem(index)}}/>))}
+              onClick={() => {deleteMfrItem(index)}}
+              readOnly={true}/>))}
               </ul>
           <input type="text" onChange={(e) => handleMfrChange(e)} value={mfrString} className="rounded p-1"/>
           <button onClick={(e) => handleMfrSubmit(e)}>Add</button>
@@ -142,7 +142,8 @@ export default function FormField (
               key={index} 
               name="interactions" 
               value={int}
-              onClick={() => {deleteInteractItem(index)}}/>))}
+              onClick={() => {deleteInteractItem(index)}}
+              readOnly={true}/>))}
               </ul>
           <input type="text" onChange={(e) => handleInteractChange(e)} value={interactString} className="rounded p-1"/>
           <button onClick={(e) => handleInteractSubmit(e)}>Add</button>
@@ -159,7 +160,6 @@ export const actionForm: ActionFunction = async ({request, params}) => {
   const method = request.method
   const data = await request.formData()
   
-  console.log(data.getAll('interactions'))
   const authData = {
     img: data.get('img'),
     name: data.get('name'),
@@ -183,8 +183,6 @@ export const actionForm: ActionFunction = async ({request, params}) => {
   if (method === 'PATCH') {
     url = 'http://localhost:5000/drugs/' + id
   }
-
-  console.log(authData)
 
   const response = await fetch(url, {
       method: method,
