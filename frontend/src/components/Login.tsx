@@ -19,7 +19,7 @@ export default function Login() {
 }
 
 
-export const actionLogin: ActionFunction = async ({request}) => {
+export const actionLogin = ({login}: any)=> async ({request}: any) => {
     const data = await request.formData()
     const authData = {
         username : data.get('username'),
@@ -36,6 +36,8 @@ export const actionLogin: ActionFunction = async ({request}) => {
     if (!response.ok) {
         throw json({message: 'error'}, {status: 500})
     }
+
+    login()
 
     return redirect('/')
 }

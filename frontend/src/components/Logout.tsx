@@ -1,6 +1,4 @@
-import type { ActionFunction } from "react-router"
 import { redirect, json, Form } from "react-router-dom"
-import { User } from "../contexts/UserContext"
 
 export default function Logout () {
     return (
@@ -10,7 +8,7 @@ export default function Logout () {
     )
 }
 
-export const actionLogout: ActionFunction = async () => {
+export const actionLogout = ({logout}: any) => async () => {
     const response = await fetch('http://localhost:5000/admin/logout', {
         method: 'DELETE',
         headers: {'content-type': 'application/json', 'accept': '*/*'},
@@ -23,7 +21,7 @@ export const actionLogout: ActionFunction = async () => {
         throw json({message: 'error'}, {status: 500})
     }
 
-    User().logout()
-    
+    logout()
+
     return redirect('/')
 }

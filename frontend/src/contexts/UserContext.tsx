@@ -14,7 +14,7 @@ const UserContext = createContext({
     logout: function () {false}
 });
 
-export const UserProvider = () => {
+export const UserProvider = ({children}: any) => {
     const [isLoggedIn, setIsLoggedIn] = useState(false)
 
     const login = () => {
@@ -29,7 +29,7 @@ export const UserProvider = () => {
     
     return (
     <UserContext.Provider value={value}>
-    <Outlet/>
+    {children}
     </UserContext.Provider>
 )}
 

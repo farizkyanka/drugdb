@@ -10,14 +10,15 @@ import { actionForm } from './components/FormField'
 import ErrorPage from './Pages/ErrorPage';
 import { actionLogout } from './components/Logout';
 import { checkAuthLoader } from './util/auth';
-import { UserProvider } from './contexts/UserContext';
+import { User } from './contexts/UserContext';
 // import DataModel from './models/DataModel';
 
 function App() {
+  const login = User().login
+  const logout = User().logout
+
   const router = createBrowserRouter(
     [{
-      element: <UserProvider/>,
-      children: [{
         path: '/',
         element: <RootLayout/>,
         children: [
@@ -26,16 +27,14 @@ function App() {
         {
           path: '/admin',
           children: [
-          {path: 'login', element: <Login/>, action: actionLogin},
-          {path: 'logout', action: actionLogout},
+          {path: 'login', element: <Login/>, action: actionLogin({login})},
+          {path: 'logout', action: actionLogout({logout})},
           // {path: 'register', element: <Register/>},
           {path: 'new-drug', element: <NewDrug/>, loader: checkAuthLoader as LoaderFunction, action: actionForm},
           {path: 'edit-drug/:drugId', element: <EditDrug/>, loader: editLoader, action: actionForm}
           ]},
-         {path: '*', element: <ErrorPage/>}
-      ]}
-      ]
-    }]
+         {path: '*', element: <ErrorPage/>}]
+        }]
   );
 
   return <RouterProvider router={router}/>
