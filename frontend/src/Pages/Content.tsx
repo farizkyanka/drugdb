@@ -1,9 +1,13 @@
 import DataModel from '../models/DataModel';
 import { useLoaderData, Link, Form, json, redirect } from 'react-router-dom';
 import type { ActionFunction } from 'react-router-dom';
+import { User } from '../contexts/UserContext';
 
 const Content = () => {
   const item = useLoaderData() as DataModel
+
+  const isLoggedIn = User().isLoggedIn
+
   return (
     <>
        <section className="container max-w-screen-lg m-10 mx-auto text-gray">
@@ -71,12 +75,16 @@ const Content = () => {
             </div>
           </div>
         </div>
-        <Link to={`../admin/edit-drug/${item._id}`}>
+        { isLoggedIn && (
+          <div>
+            <Link to={`../admin/edit-drug/${item._id}`}>
           <button className='bg-blue border border-r-2'>Edit Drug</button>
         </Link>
-        <Form method="delete">
+          <Form method="delete">
           <button className='bg-blue border border-r-2'>Delete Drug</button>
         </Form>
+          </div>
+        )}
       </section>
     </>
   );

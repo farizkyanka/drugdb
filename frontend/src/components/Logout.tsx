@@ -1,5 +1,6 @@
 import type { ActionFunction } from "react-router"
 import { redirect, json, Form } from "react-router-dom"
+import { User } from "../contexts/UserContext"
 
 export default function Logout () {
     return (
@@ -22,5 +23,7 @@ export const actionLogout: ActionFunction = async () => {
         throw json({message: 'error'}, {status: 500})
     }
 
+    User().logout()
+    
     return redirect('/')
 }

@@ -32,7 +32,7 @@ export const actionLogin: ActionFunction = async ({request}) => {
         credentials: "include",
         body: JSON.stringify(authData)
     })
-
+    
     if (!response.ok) {
         throw json({message: 'error'}, {status: 500})
     }

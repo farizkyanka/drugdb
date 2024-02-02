@@ -2,6 +2,7 @@ import { useState } from "react"
 import { Link } from 'react-router-dom'
 import DataModel from "../models/DataModel";
 import Logout from "./Logout";
+import { User } from "../contexts/UserContext";
 
 export default function Navbar() {
 
@@ -24,6 +25,8 @@ export default function Navbar() {
     setQuery(stringify);
     fetchQuery(stringify);
   }
+
+  const isLoggedIn = User().isLoggedIn
 
   return (
     <>
@@ -76,7 +79,7 @@ export default function Navbar() {
             </div>
           </form>
 
-          <Logout/>
+          { isLoggedIn && (<Logout/>)}
         </nav>
       </header>
     </>
