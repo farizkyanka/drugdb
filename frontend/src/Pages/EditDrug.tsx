@@ -1,7 +1,6 @@
-import { redirect, useLoaderData } from "react-router-dom";
+import { useLoaderData } from "react-router-dom";
 import FormField from "../components/FormField";
 import DataModel from "../models/DataModel";
-import { User } from "../contexts/UserContext";
 
 const EditDrug = () => {
     const item = useLoaderData() as DataModel
@@ -25,10 +24,7 @@ const EditDrug = () => {
 }
 
 export const editLoader = async ({params}:{params: any}) => {
-  if (!User().isLoggedIn) {
-    return redirect('/admin/login')
-  }
-
+  
   const response = await fetch('http://localhost:5000/drugs/' + params.drugId, {
       headers: {
         'Content-Type':'application/json',

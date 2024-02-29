@@ -1,5 +1,4 @@
 import { redirect, Form, json } from "react-router-dom"
-import type { ActionFunction } from "react-router";
 
 export default function Login() {
     return <>

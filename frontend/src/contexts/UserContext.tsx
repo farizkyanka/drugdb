@@ -1,5 +1,4 @@
 import { createContext, useState, useContext } from "react";
-import { Outlet } from "react-router-dom";
 
 type UserContextType = { 
     isLoggedIn: boolean,
