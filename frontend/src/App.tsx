@@ -29,7 +29,7 @@ function App() {
           children: [
           {path: 'login', element: <Login/>, action: actionLogin({login})},
           {path: 'logout', action: actionLogout({logout})},
-          {path: 'new-drug', element: <NewDrug/>, action: actionForm},
+          {path: 'new-drug', element: isLoggedIn ? <NewDrug/> : <Navigate to='../login'/>, action: actionForm},
           {path: 'edit-drug/:drugId', element: isLoggedIn ? <EditDrug/> : <Navigate to='../login'/>, loader: editLoader, action: actionForm}
           // {path: 'register', element: <Register/>},
           ]},
