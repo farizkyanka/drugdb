@@ -75,12 +75,16 @@ const Content = () => {
           </div>
         </div>
         {isLoggedIn && (
-          <div>
+          <div className="flex justify-evenly mt-4">
             <Link to={`../admin/edit-drug/${item._id}`}>
-              <button className="bg-blue border border-r-2">Edit Drug</button>
+              <button className="rounded p-2 dark:bg-gray-800 text-white">
+                Edit Drug
+              </button>
             </Link>
             <Form method="delete">
-              <button className="bg-blue border border-r-2">Delete Drug</button>
+              <button className="rounded p-2 dark:bg-gray-800 text-white">
+                Delete Drug
+              </button>
             </Form>
           </div>
         )}
