@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import DataModel from "../models/DataModel";
 
-export default function Search() {
+export default function SearchBar() {
   const [query, setQuery] = useState("");
   const [searchResult, setSearchResult] = useState([]);
 

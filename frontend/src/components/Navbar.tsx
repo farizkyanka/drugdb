@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import Logout from "./Logout";
 import { User } from "../contexts/UserContext";
-import Search from "./SearchBar";
+import SearchBar from "./SearchBar";
 
 export default function Navbar() {
   const isLoggedIn = User().isLoggedIn;
@@ -31,7 +31,7 @@ export default function Navbar() {
           </div>
 
           <div className="flex grow my-2">
-            <Search />
+            <SearchBar />
           </div>
 
           <div className="flex flex-row-reverse w-1/4">
