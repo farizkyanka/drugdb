@@ -25,17 +25,18 @@ const Content = () => {
             </h3>
             <h3 className="w-full">
               <span className="font-bold">Manufacturer: </span>
-              <ul>
-                {item.manufacturer.map((manufacture, index) => (
-                  <li
-                    className="bg-blue-400 inline m-2 px-2 rounded text-white"
-                    key={index}
-                  >
-                    {manufacture}
-                  </li>
-                ))}
-              </ul>
             </h3>
+            <div className="flex flex-wrap justify-center">
+              {item.manufacturer.map((manufacture, index) => (
+                <div
+                  className="bg-blue-400 justify-center inline m-2 px-2 rounded text-white"
+                  key={index}
+                >
+                  {manufacture}
+                </div>
+              ))}
+            </div>
+
             <h3 className="w-full">
               <span className="font-bold">Category: </span>
               {item.category}

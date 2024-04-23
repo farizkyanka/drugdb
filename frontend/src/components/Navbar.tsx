@@ -30,7 +30,7 @@ export default function Navbar() {
             )}
           </div>
 
-          <div className="flex grow my-2">
+          <div className="flex grow m-2">
             <SearchBar />
           </div>
 

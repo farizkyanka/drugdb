@@ -3,21 +3,25 @@ import DataModel from "../models/DataModel";
 
 export default function SearchResult() {
   type itemType = Array<DataModel>;
-  const item = useLoaderData() as itemType;
+  const items = useLoaderData() as itemType;
   return (
     <>
-      <section className="container flex justify-center p-2">
-        <ul className="flex flex-col w-full">
-          {item.map((it, index) => (
-            <Link to={`/drugs/${it._id}`} key={index}>
-              <li className="flex flex-row m-2 border-2 rounded w-full">
-                <img src={it.img} className="mx-2 w-20" />
+      <section className="p-2">
+        <ul className="flex flex-col w-full items-center">
+          {items.map((item, index) => (
+            <li className="border-2 w-full rounded-lg mb-2">
+              <Link
+                to={`/drugs/${item._id}`}
+                key={index}
+                className="flex flex-row items-center"
+              >
+                <img src={item.img} className="mr-2 w-20 rounded-lg" />
                 <div className="flex flex-col">
-                  <h1>{it.name}</h1>
-                  <h2>{it.category}</h2>
+                  <h1 className="font-bold">{item.name}</h1>
+                  <h2>{item.category}</h2>
                 </div>
-              </li>
-            </Link>
+              </Link>
+            </li>
           ))}
         </ul>
       </section>

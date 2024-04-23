@@ -74,7 +74,7 @@ export default function FormField({
         <Form method={method}>
           <section className="grid sm:grid-cols-12">
             <div className="sm:col-span-3 justify-center p-3">
-              <img src={img} className="w-full" />
+              <img src={img} className="w-full rounded" />
               <input
                 type="text"
                 name="img"
@@ -117,14 +117,15 @@ export default function FormField({
               />
               <div className="flex flex-col rounded border-2">
                 <h6 className="font-bold text-center my-1">Manufacturer: </h6>
-                <ul className="flex text-center">
+                <ul className="text-center">
                   {mfr.map((manufacture, index) => (
                     <input
-                      className="bg-blue-400 w-full mb-2 px-2 rounded text-white hover:bg-red-600 cursor-pointer"
+                      className="bg-blue-400 text-center m-2 px-2 rounded text-white hover:bg-red-600 cursor-pointer"
                       type="text"
                       key={index}
                       name="manufacturers"
                       value={manufacture}
+                      size={17}
                       onClick={() => {
                         deleteMfrItem(index);
                       }}
@@ -136,6 +137,7 @@ export default function FormField({
                   type="text"
                   onChange={(e) => handleMfrChange(e)}
                   value={mfrString}
+                  placeholder="Type manufacturer here"
                   className="w-full border-2 p-1 mb-2"
                 />
                 <button
@@ -207,6 +209,7 @@ export default function FormField({
                       key={index}
                       name="interactions"
                       value={int}
+                      size={17}
                       onClick={() => {
                         deleteInteractItem(index);
                       }}
@@ -218,6 +221,7 @@ export default function FormField({
                   type="text"
                   onChange={(e) => handleInteractChange(e)}
                   value={interactString}
+                  placeholder="Type interaction here"
                   className="border-2 p-1 mb-2"
                 />
                 <button
