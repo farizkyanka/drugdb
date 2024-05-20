@@ -21,7 +21,6 @@ function App() {
   const login = User().login;
   const logout = User().logout;
   const isLoggedIn = User().isLoggedIn;
-
   const router = createBrowserRouter([
     {
       path: "/",

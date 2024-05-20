@@ -2,8 +2,10 @@ import DataModel from "../models/DataModel";
 import { useLoaderData, Link, Form, json, redirect } from "react-router-dom";
 import type { ActionFunction } from "react-router-dom";
 import { User } from "../contexts/UserContext";
+import dateFormatter from "../util/dateFormatter";
 
 const Content = () => {
+  console.log(useLoaderData());
   const item = useLoaderData() as DataModel;
 
   const isLoggedIn = User().isLoggedIn;
@@ -12,7 +14,7 @@ const Content = () => {
     <>
       <section className="container max-w-screen-lg m-10 mx-auto text-gray">
         <div className="grid sm:grid-cols-12 text-center">
-          <div className="sm:col-span-3 justify-center text-center p-10">
+          <div className="sm:col-span-3 rounded bg-slate-300 justify-center text-center m-2 p-10">
             <img src={item.img} className="w-full" />
             <h2 className="w-full my-3 font-bold text-lg">{item.name}</h2>
             <h3 className="w-full">
@@ -42,7 +44,7 @@ const Content = () => {
               {item.category}
             </h3>
           </div>
-          <div className="sm:col-span-6 md:text-left p-3 sm:border-4 sm:rounded-lg">
+          <div className="sm:col-span-9 border-y-2 border-slate-100 md:text-left p-3">
             <div className="m-3">
               <p className="font-bold">Indications: </p>
               {item.indication}
@@ -59,8 +61,6 @@ const Content = () => {
               <p className="font-bold">Lactation Safety:</p>
               {item.lactationSafety}
             </div>
-          </div>
-          <div className="sm:col-span-3 md:text-left p-3">
             <div className="w-full m-3">
               <p className="font-bold">Contraindications: </p>
               <p>{item.contraindication}</p>
@@ -74,6 +74,26 @@ const Content = () => {
               <p>{item.interactions}</p>
             </div>
           </div>
+        </div>
+        {/* <div className="sm:col-span-3 md:text-left p-3">
+            <div className="w-full m-3">
+              <p className="font-bold">Contraindications: </p>
+              <p>{item.contraindication}</p>
+            </div>
+            <div className="w-full m-3">
+              <p className="font-bold">Adverse Effects: </p>
+              <p>{item.adverseEffects}</p>
+            </div>
+            <div className="w-full m-3">
+              <p className="font-bold">Interactions: </p>
+              <p>{item.interactions}</p>
+            </div>
+              </div>
+              </div> */}
+        <div className="flex flex-row-reverse mt-2">
+          <h6 className="italic text-gray-400">
+            Last updated: {dateFormatter(item.lastUpdated)}
+          </h6>
         </div>
         {isLoggedIn && (
           <div className="flex justify-evenly mt-4">
@@ -95,21 +115,27 @@ const Content = () => {
 };
 
 export const contentLoader = async ({ params }: { params: any }) => {
-  const response = await fetch("http://localhost:5000/drugs/" + params.drugId, {
-    headers: {
-      "Content-Type": "application/json",
-      "Access-Control-Allow-Origin": "http://localhost:5000/",
-    },
-  });
+  const response = await fetch(
+    import.meta.env.VITE_API_URL + "drugs/" + params.drugId,
+    {
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": import.meta.env.VITE_API_URL,
+      },
+    }
+  );
   return response;
 };
 
 export const actionDeleteDrug: ActionFunction = async ({ request, params }) => {
-  const response = await fetch("http://localhost:5000/drugs/" + params.drugId, {
-    method: "delete",
-    headers: { "content-type": "application/json" },
-    credentials: "include",
-  });
+  const response = await fetch(
+    import.meta.env.VITE_API_URL + "drugs/" + params.drugId,
+    {
+      method: "delete",
+      headers: { "content-type": "application/json" },
+      credentials: "include",
+    }
+  );
 
   const data = await response.json();
   console.log(data);

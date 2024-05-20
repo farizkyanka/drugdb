@@ -8,7 +8,7 @@ export default function SearchBar() {
 
   async function fetchQuery(query: string) {
     const response = await fetch(
-      "http://localhost:5000/drugs/search?prompt=" + query,
+      import.meta.env.VITE_API_URL + "drugs/search?prompt=" + query,
       {
         method: "GET",
         headers: {

@@ -13,4 +13,5 @@ export default interface DataModel {
   contraindication: string;
   adverseEffects: string;
   interactions: [];
+  lastUpdated: string;
 }

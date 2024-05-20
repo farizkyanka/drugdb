@@ -266,12 +266,12 @@ export const actionForm: ActionFunction = async ({ request, params }) => {
     interactions: data.getAll("interactions"),
   };
 
-  let url = "http://localhost:5000/drugs";
+  let url = import.meta.env.VITE_API_URL + "drugs";
 
   const id = params.drugId;
 
   if (method === "PATCH") {
-    url = "http://localhost:5000/drugs/" + id;
+    url = import.meta.env.VITE_API_URL + "drugs/" + id;
   }
 
   const response = await fetch(url, {

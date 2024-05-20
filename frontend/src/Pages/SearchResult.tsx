@@ -6,8 +6,8 @@ export default function SearchResult() {
   const items = useLoaderData() as itemType;
   return (
     <>
-      <section className="p-2">
-        <ul className="flex flex-col w-full items-center">
+      <section className="p-2 flex justify-center">
+        <ul className="flex flex-col w-full lg:w-1/2 items-center">
           {items.map((item, index) => (
             <li className="border-2 w-full rounded-lg mb-2">
               <Link
@@ -32,7 +32,7 @@ export default function SearchResult() {
 export const searchLoader = async ({ request }: any) => {
   const category = new URL(request.url).searchParams.get("category");
   const response = await fetch(
-    "http://localhost:5000/drugs/search?category=" + category,
+    import.meta.env.VITE_API_URL + "drugs/search?category=" + category,
     {
       method: "GET",
       headers: {
