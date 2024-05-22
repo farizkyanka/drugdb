@@ -121,13 +121,29 @@ export default function FormField({
                 required
               />
               <h6 className="font-bold">Form: </h6>
-              <input
+              <select
+                name="form"
+                defaultValue={form}
+                required
+                className="w-full h-8 rounded p-2 mb-2"
+              >
+                <option value="tablet">tablet</option>
+                <option value="kapsul">kapsul</option>
+                <option value="sirup">sirup</option>
+                <option value="puff">puff</option>
+                <option value="supositoria">supositoria</option>
+                <option value="enema">enema</option>
+                <option value="intravena">intravena</option>
+                <option value="intramuskular">intramuskular</option>
+                <option value="subkutan">subkutan</option>
+              </select>
+              {/* <input
                 type="text"
                 name="form"
                 defaultValue={form}
                 className="w-full rounded border-2 p-1 mb-2"
                 required
-              />
+              /> */}
               <h6 className="font-bold">Category: </h6>
               <input
                 type="text"
