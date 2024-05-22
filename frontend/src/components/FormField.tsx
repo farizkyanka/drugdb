@@ -1,6 +1,7 @@
 import { json, redirect, Form } from "react-router-dom";
 import { ActionFunction } from "react-router-dom";
 import { FormEvent, useState } from "react";
+import { FaRegWindowClose } from "react-icons/fa";
 
 export default function FormField({
   method = "POST",
@@ -94,7 +95,7 @@ export default function FormField({
                   onChange={(e) => handleFramedImg(e)}
                   defaultValue={framedImg}
                   placeholder="insert image URL"
-                  className="w-3/4 rounded border-2 p-3 mb-2"
+                  className="w-3/4 h-12 rounded border-2 p-3 mb-2"
                 />
                 <button
                   onClick={(e) => handleImgSubmit(e)}
@@ -168,7 +169,7 @@ export default function FormField({
                 </button>
               </div>
             </div>
-            <div className="sm:col-span-9 md:text-left p-3 sm:border-4 sm:rounded-lg">
+            <div className="sm:col-span-9 md:text-left p-3 border-y">
               <h6 className="font-bold">Indications: </h6>
               <textarea
                 name="indication"
@@ -213,20 +214,23 @@ export default function FormField({
               />
 
               <p className="font-bold">Interactions: </p>
-              <ul className="text-center">
+              <ul>
                 {interact.map((int, index) => (
-                  <input
-                    className="bg-blue-400 inline m-2 px-2 rounded text-white hover:bg-red-600 cursor-pointer"
-                    type="text"
-                    key={index}
-                    name="interactions"
-                    value={int}
-                    size={17}
-                    onClick={() => {
-                      deleteInteractItem(index);
-                    }}
-                    readOnly={true}
-                  />
+                  <div className="flex flex-wrap my-2 w-full items-center rounded border-2">
+                    <textarea
+                      className="m-2 px-2 bg-none w-11/12"
+                      key={index}
+                      name="interactions"
+                      value={`- ${int}`}
+                      readOnly={true}
+                    />
+                    <FaRegWindowClose
+                      className="hover:bg-red-600 rounded hover:text-white cursor-pointer"
+                      onClick={() => {
+                        deleteInteractItem(index);
+                      }}
+                    />
+                  </div>
                 ))}
               </ul>
               <input
@@ -234,11 +238,11 @@ export default function FormField({
                 onChange={(e) => handleInteractChange(e)}
                 value={interactString}
                 placeholder="Type interaction here"
-                className="border-2 p-1 mb-2"
+                className="border-2 p-1 mb-2 w-11/12 h-12"
               />
               <button
                 onClick={(e) => handleInteractSubmit(e)}
-                className="p-3 rounded bg-green-200"
+                className="p-3 rounded bg-green-200 h-12"
               >
                 Add
               </button>
