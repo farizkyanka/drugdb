@@ -12,10 +12,10 @@ import NewDrug from "./Pages/NewDrug";
 import EditDrug, { editLoader } from "./Pages/EditDrug";
 import { actionForm } from "./components/FormField";
 import ErrorPage from "./Pages/ErrorPage";
-import { actionLogout } from "./components/Logout";
+import { loaderLogout } from "./components/Logout";
 import { User } from "./contexts/UserContext";
 import SearchResult, { searchLoader } from "./Pages/SearchResult";
-// import DataModel from './models/DataModel';
+import Register, { action as actionRegister } from "./components/Register";
 
 function App() {
   const login = User().login;
@@ -47,7 +47,7 @@ function App() {
               element: <Login />,
               action: actionLogin({ login }),
             },
-            { path: "logout", action: actionLogout({ logout }) },
+            { path: "logout", loader: loaderLogout({ logout }) },
             {
               path: "new-drug",
               element: isLoggedIn ? <NewDrug /> : <Navigate to="../login" />,
@@ -59,7 +59,7 @@ function App() {
               loader: editLoader,
               action: actionForm,
             },
-            // {path: 'register', element: <Register/>},
+            { path: "register", element: <Register />, action: actionRegister },
           ],
         },
         { path: "*", element: <ErrorPage /> },

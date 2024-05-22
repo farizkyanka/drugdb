@@ -8,7 +8,7 @@ export default function Logout() {
   );
 }
 
-export const actionLogout =
+export const loaderLogout =
   ({ logout }: any) =>
   async () => {
     const response = await fetch(
@@ -28,5 +28,5 @@ export const actionLogout =
 
     logout();
 
-    return redirect("/");
+    return redirect("../../");
   };

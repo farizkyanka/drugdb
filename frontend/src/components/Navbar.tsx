@@ -36,9 +36,12 @@ export default function Navbar() {
 
           <div className="flex flex-row-reverse w-1/4">
             {isLoggedIn && (
-              <div className="mx-2 px-2 flex flex-col justify-center text-white hover:bg-cyan-600">
-                {<Logout />}
-              </div>
+              <Link
+                to="./admin/logout"
+                className="mx-2 px-2 flex flex-col justify-center text-white hover:bg-cyan-600"
+              >
+                <h6>Logout</h6>
+              </Link>
             )}
           </div>
         </nav>
