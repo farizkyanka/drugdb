@@ -305,6 +305,7 @@ export const actionForm: ActionFunction = async ({ request, params }) => {
     adverseEffects: data.get("adverseEffects"),
     interactions: data.getAll("interactions"),
   };
+  console.log(authData);
 
   let url = import.meta.env.VITE_API_URL + "drugs";
 
