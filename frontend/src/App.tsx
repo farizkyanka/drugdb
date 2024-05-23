@@ -16,6 +16,7 @@ import { loaderLogout } from "./components/Logout";
 import { User } from "./contexts/UserContext";
 import SearchResult, { searchLoader } from "./Pages/SearchResult";
 import Register, { action as actionRegister } from "./components/Register";
+import ErrorBoundary from "./components/ErrorBoundary";
 
 function App() {
   const login = User().login;
@@ -24,23 +25,32 @@ function App() {
   const router = createBrowserRouter([
     {
       path: "/",
+
       element: <RootLayout />,
       children: [
-        { index: true, element: <Home />, loader: HomeLoader },
+        {
+          index: true,
+          errorElement: <ErrorBoundary />,
+          element: <Home />,
+          loader: HomeLoader,
+        },
         {
           path: "drugs/:drugId",
           id: "drug-id",
+          errorElement: <ErrorBoundary />,
           element: <Content />,
           loader: contentLoader,
           action: actionDeleteDrug,
         },
         {
           path: "drugs/searchresult",
+          errorElement: <ErrorBoundary />,
           element: <SearchResult />,
           loader: searchLoader,
         },
         {
           path: "/admin",
+          errorElement: <ErrorBoundary />,
           children: [
             {
               path: "login",

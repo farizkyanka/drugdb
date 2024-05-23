@@ -10,6 +10,7 @@ export default function FormField({
   composition = "",
   form = "",
   category = "",
+  fornas = false,
   pregnancyCategory = "",
   lactationSafety = "",
   manufacturer = [],
@@ -93,7 +94,7 @@ export default function FormField({
                 <input
                   type="text"
                   onChange={(e) => handleFramedImg(e)}
-                  defaultValue={framedImg}
+                  defaultValue={img}
                   placeholder="insert image URL"
                   className="w-3/4 h-12 rounded border-2 p-3 mb-2"
                 />
@@ -152,7 +153,7 @@ export default function FormField({
                 className="w-full rounded border-2 p-1 mb-2"
                 required
               />
-              <div className="flex flex-col rounded border-2">
+              <div className="flex flex-col rounded border-2 mb-2">
                 <h6 className="font-bold text-center my-1">Manufacturer: </h6>
                 <ul className="text-center">
                   {mfr.map((manufacture, index) => (
@@ -184,6 +185,13 @@ export default function FormField({
                   Add
                 </button>
               </div>
+              <p className="font-bold inline">Fornas included: </p>
+              <input
+                type="checkbox"
+                name="fornas"
+                className="inline border-2 p-1 mb-2 w-6 h-6"
+                required
+              />
             </div>
             <div className="sm:col-span-9 md:text-left p-3 border-y">
               <h6 className="font-bold">Indications: </h6>
@@ -241,7 +249,7 @@ export default function FormField({
                       readOnly={true}
                     />
                     <FaRegWindowClose
-                      className="hover:bg-red-600 rounded hover:text-white cursor-pointer"
+                      className="hover:bg-red-600 rounded hover:text-white cursor-pointer w-6 h-6"
                       onClick={() => {
                         deleteInteractItem(index);
                       }}
@@ -287,6 +295,7 @@ export const actionForm: ActionFunction = async ({ request, params }) => {
     composition: data.get("composition"),
     form: data.get("form"),
     category: data.get("category"),
+    fornas: data.get("fornas"),
     pregnancyCategory: data.get("pregnancyCategory"),
     lactationSafety: data.get("lactationSafety"),
     manufacturer: data.getAll("manufacturers"),
@@ -297,6 +306,7 @@ export const actionForm: ActionFunction = async ({ request, params }) => {
     interactions: data.getAll("interactions"),
   };
 
+  console.log(authData);
   let url = import.meta.env.VITE_API_URL + "drugs";
 
   const id = params.drugId;
