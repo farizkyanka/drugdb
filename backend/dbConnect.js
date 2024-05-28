@@ -10,7 +10,7 @@ const dbConnect = () => {
     console.log("connected to database");
   });
   mongoose.connection.on("disconnected", () => {
-    console.log("mongodb connection disconnection");
+    console.log("mongodb connection disrupted");
   });
 };
 

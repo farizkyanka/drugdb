@@ -38,14 +38,12 @@ export default function Home() {
 }
 
 export const HomeLoader = async () => {
-  const response = await fetch(
-    import.meta.env.VITE_API_URL + "drugs/list-drug-categories",
-    {
-      headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": import.meta.env.VITE_API_URL,
-      },
-    }
-  );
+  const API = import.meta.env.VITE_API_URL;
+  const response = await fetch(API + "drugs/list-drug-categories", {
+    headers: {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": import.meta.env.VITE_API_URL,
+    },
+  });
   return response;
 };

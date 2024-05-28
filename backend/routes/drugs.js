@@ -65,6 +65,8 @@ router.post("/", isLoggedIn, async (req, res) => {
       composition: req.body.composition,
       form: req.body.form,
       category: req.body.category,
+      drugorvaccine: req.body.drugorvaccine,
+      fornasRegistered: req.body.fornasRegistered,
       indication: req.body.indication,
       dose: req.body.dose,
       contraindication: req.body.contraindication,
@@ -79,9 +81,11 @@ router.post("/", isLoggedIn, async (req, res) => {
       const newDrug = await drug.save();
       res.status(201).json(newDrug);
     } catch (err) {
+      console.log(err);
       res.status(400).json({ message: err.message });
     }
   } catch (err) {
+    console.log(err);
     res.json(err);
   }
 });
@@ -102,6 +106,12 @@ router.patch("/:id", isLoggedIn, getDrugsById, async (req, res) => {
   }
   if (req.body.category != null) {
     res.drug.category = req.body.category;
+  }
+  if (req.body.drugorvaccine != null) {
+    res.drug.drugorvaccine = req.body.drugorvaccine;
+  }
+  if (req.body.fornasRegistered != null) {
+    res.drug.fornasRegistered = req.body.fornasRegistered;
   }
   if (req.body.indication != null) {
     res.drug.indication = req.body.indication;
@@ -132,7 +142,8 @@ router.patch("/:id", isLoggedIn, getDrugsById, async (req, res) => {
     const updatedDrug = await res.drug.save();
     res.json(updatedDrug);
   } catch (err) {
-    res.status(400).json({ message: err.message });
+    console.log(err.message);
+    res.status(400).json({ statusText: err.message });
   }
 });
 

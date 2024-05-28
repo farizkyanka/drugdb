@@ -10,7 +10,8 @@ export default function FormField({
   composition = "",
   form = "",
   category = "",
-  fornas = false,
+  drugorvaccine = "",
+  fornasRegistered = false,
   pregnancyCategory = "",
   lactationSafety = "",
   manufacturer = [],
@@ -89,10 +90,41 @@ export default function FormField({
         <Form method={method}>
           <section className="grid sm:grid-cols-12">
             <div className="sm:col-span-3 justify-center p-3">
+              <div className="flex">
+                <div className="p-2 bg-violet-500 rounded-l w-full flex flex-row-reverse justify-center items-center text-white">
+                  <input
+                    type="radio"
+                    id="drug"
+                    name="drugorvaccine"
+                    value="drug"
+                  />
+                  <label
+                    htmlFor="drug"
+                    className="m-2 drop-shadow-md text-lg text-slate-100"
+                  >
+                    drug
+                  </label>
+                </div>
+                <div className="p-2 bg-green-400 rounded-r w-full flex justify-center items-center text-white">
+                  <input
+                    type="radio"
+                    id="vaccine"
+                    name="drugorvaccine"
+                    value="vaccine"
+                  />
+                  <label
+                    htmlFor="vaccine"
+                    className="m-2 drop-shadow-md text-lg text-gray-600"
+                  >
+                    vaccine
+                  </label>
+                </div>
+              </div>
               <img src={framedImg} className="w-full rounded" />
               <div className="flex flex-wrap">
                 <input
                   type="text"
+                  name="img"
                   onChange={(e) => handleFramedImg(e)}
                   defaultValue={img}
                   placeholder="insert image URL"
@@ -131,6 +163,8 @@ export default function FormField({
                 <option value="tablet">tablet</option>
                 <option value="kapsul">kapsul</option>
                 <option value="sirup">sirup</option>
+                <option value="salep">salep</option>
+                <option value="drop">drop</option>
                 <option value="puff">puff</option>
                 <option value="supositoria">supositoria</option>
                 <option value="enema">enema</option>
@@ -138,13 +172,6 @@ export default function FormField({
                 <option value="intramuskular">intramuskular</option>
                 <option value="subkutan">subkutan</option>
               </select>
-              {/* <input
-                type="text"
-                name="form"
-                defaultValue={form}
-                className="w-full rounded border-2 p-1 mb-2"
-                required
-              /> */}
               <h6 className="font-bold">Category: </h6>
               <input
                 type="text"
@@ -185,12 +212,12 @@ export default function FormField({
                   Add
                 </button>
               </div>
-              <p className="font-bold inline">Fornas included: </p>
+              <p className="font-bold inline">Fornas Registered: </p>
               <input
                 type="checkbox"
-                name="fornas"
+                name="fornasRegistered"
                 className="inline border-2 p-1 mb-2 w-6 h-6"
-                required
+                defaultChecked={fornasRegistered}
               />
             </div>
             <div className="sm:col-span-9 md:text-left p-3 border-y">
@@ -240,12 +267,14 @@ export default function FormField({
               <p className="font-bold">Interactions: </p>
               <ul>
                 {interact.map((int, index) => (
-                  <div className="flex flex-wrap my-2 w-full items-center rounded border-2">
+                  <div
+                    key={index}
+                    className="flex flex-wrap my-2 w-full items-center rounded border-2"
+                  >
                     <textarea
                       className="m-2 px-2 bg-none w-11/12"
-                      key={index}
                       name="interactions"
-                      value={`- ${int}`}
+                      value={`${int}`}
                       readOnly={true}
                     />
                     <FaRegWindowClose
@@ -295,7 +324,8 @@ export const actionForm: ActionFunction = async ({ request, params }) => {
     composition: data.get("composition"),
     form: data.get("form"),
     category: data.get("category"),
-    fornas: data.get("fornas"),
+    drugorvaccine: data.get("drugorvaccine"),
+    fornasRegistered: data.get("fornasRegistered") ? true : false,
     pregnancyCategory: data.get("pregnancyCategory"),
     lactationSafety: data.get("lactationSafety"),
     manufacturer: data.getAll("manufacturers"),
@@ -306,7 +336,6 @@ export const actionForm: ActionFunction = async ({ request, params }) => {
     interactions: data.getAll("interactions"),
   };
 
-  console.log(authData);
   let url = import.meta.env.VITE_API_URL + "drugs";
 
   const id = params.drugId;
@@ -323,7 +352,10 @@ export const actionForm: ActionFunction = async ({ request, params }) => {
   });
   const responseData = await response.json();
   if (!response.ok) {
-    throw json({ message: responseData }, { status: 500 });
+    throw json(
+      { message: responseData.message },
+      { status: responseData.status }
+    );
   } else {
     return redirect("/drugs/" + responseData._id);
   }

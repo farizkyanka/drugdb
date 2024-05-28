@@ -5,6 +5,8 @@ export default interface DataModel {
   composition: string;
   form: string;
   category: string;
+  drugorvaccine: string;
+  fornasRegistered: boolean;
   pregnancyCategory: string;
   lactationSafety: string;
   manufacturer: [];

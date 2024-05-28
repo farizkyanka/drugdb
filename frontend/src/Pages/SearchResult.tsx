@@ -9,7 +9,7 @@ export default function SearchResult() {
       <section className="p-2 flex justify-center">
         <ul className="flex flex-col w-full lg:w-1/2 items-center">
           {items.map((item, index) => (
-            <li className="border-2 w-full rounded-lg mb-2">
+            <li key={index} className="border-2 w-full rounded-lg mb-2">
               <Link
                 to={`/drugs/${item._id}`}
                 key={index}

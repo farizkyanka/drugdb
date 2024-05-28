@@ -3,23 +3,41 @@ import { useLoaderData, Link, Form, json, redirect } from "react-router-dom";
 import type { ActionFunction } from "react-router-dom";
 import { User } from "../contexts/UserContext";
 import dateFormatter from "../util/dateFormatter";
+import toTitleCase from "../util/toTitleCase";
 
 const Content = () => {
-  console.log(useLoaderData());
   const item = useLoaderData() as DataModel;
 
   const isLoggedIn = User().isLoggedIn;
+
+  function drugorvaccinedef(data: string) {
+    if (data === "vaccine") {
+      return "bg-violet-400";
+    } else {
+      return "bg-green-400";
+    }
+  }
 
   return (
     <>
       <section className="container max-w-screen-lg m-10 mx-auto text-gray">
         <div className="grid sm:grid-cols-12 text-center">
-          <div className="sm:col-span-3 rounded bg-slate-300 justify-center text-center m-2 p-10">
-            <img src={item.img} className="w-full" />
-            <h2 className="w-full my-3 font-bold text-lg">{item.name}</h2>
+          <div
+            className={`sm:col-span-3 rounded ${drugorvaccinedef(
+              item.drugorvaccine
+            )} flex flex-col items-center text-center m-2 p-8`}
+          >
+            <div
+              className="rounded-md bg-cover w-36 h-36"
+              style={{ backgroundImage: `url(${item.img})` }}
+            ></div>
+            {/* <img src={item.img} className="w-full" /> */}
+            <h2 className="w-full my-3 font-bold text-lg">
+              {toTitleCase(item.name)}
+            </h2>
             <h3 className="w-full">
               <span className="font-bold">Composition: </span>
-              {item.composition}
+              {toTitleCase(item.composition)}
             </h3>
             <h3 className="w-full">
               <span className="font-bold">Form: </span>
@@ -138,7 +156,6 @@ export const actionDeleteDrug: ActionFunction = async ({ request, params }) => {
   );
 
   const data = await response.json();
-  console.log(data);
 
   if (!response.ok) {
     throw json({ message: "error" }, { status: 500 });

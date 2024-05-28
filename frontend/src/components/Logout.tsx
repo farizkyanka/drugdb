@@ -20,8 +20,6 @@ export const loaderLogout =
       }
     );
 
-    console.log(response);
-
     if (!response.ok) {
       throw json({ message: "error" }, { status: 500 });
     }
