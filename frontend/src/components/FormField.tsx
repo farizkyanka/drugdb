@@ -2,6 +2,7 @@ import { json, redirect, Form } from "react-router-dom";
 import { ActionFunction } from "react-router-dom";
 import { FormEvent, useState } from "react";
 import { FaRegWindowClose } from "react-icons/fa";
+import toTitleCase from "../util/toTitleCase";
 
 export default function FormField({
   method = "POST",
@@ -10,7 +11,6 @@ export default function FormField({
   composition = "",
   form = "",
   category = "",
-  drugorvaccine = "",
   fornasRegistered = false,
   pregnancyCategory = "",
   lactationSafety = "",
@@ -53,8 +53,8 @@ export default function FormField({
     if (mfrString.length === 0) {
       return;
     } else {
-      const newArray: [] = [...mfr, mfrString];
-      setMfr(newArray);
+      const newArray = [...mfr, mfrString];
+      setMfr(newArray as never[]);
       setMfrString("");
     }
   };
@@ -78,8 +78,8 @@ export default function FormField({
     if (interactString.length === 0) {
       return;
     } else {
-      const newArray: string[] = [...interact, interactString];
-      setInteract(newArray);
+      const newArray = [...interact, interactString] as string[];
+      setInteract(newArray as never[]);
       setInteractString("");
     }
   };
@@ -90,36 +90,7 @@ export default function FormField({
         <Form method={method}>
           <section className="grid sm:grid-cols-12">
             <div className="sm:col-span-3 justify-center p-3">
-              <div className="flex">
-                <div className="p-2 bg-violet-500 rounded-l w-full flex flex-row-reverse justify-center items-center text-white">
-                  <input
-                    type="radio"
-                    id="drug"
-                    name="drugorvaccine"
-                    value="drug"
-                  />
-                  <label
-                    htmlFor="drug"
-                    className="m-2 drop-shadow-md text-lg text-slate-100"
-                  >
-                    drug
-                  </label>
-                </div>
-                <div className="p-2 bg-green-400 rounded-r w-full flex justify-center items-center text-white">
-                  <input
-                    type="radio"
-                    id="vaccine"
-                    name="drugorvaccine"
-                    value="vaccine"
-                  />
-                  <label
-                    htmlFor="vaccine"
-                    className="m-2 drop-shadow-md text-lg text-gray-600"
-                  >
-                    vaccine
-                  </label>
-                </div>
-              </div>
+              <div className="flex"></div>
               <img src={framedImg} className="w-full rounded" />
               <div className="flex flex-wrap">
                 <input
@@ -320,11 +291,10 @@ export const actionForm: ActionFunction = async ({ request, params }) => {
 
   const authData = {
     img: data.get("img"),
-    name: data.get("name"),
+    name: toTitleCase(data.get("name") as string),
     composition: data.get("composition"),
     form: data.get("form"),
     category: data.get("category"),
-    drugorvaccine: data.get("drugorvaccine"),
     fornasRegistered: data.get("fornasRegistered") ? true : false,
     pregnancyCategory: data.get("pregnancyCategory"),
     lactationSafety: data.get("lactationSafety"),

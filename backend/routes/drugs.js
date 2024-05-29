@@ -65,7 +65,6 @@ router.post("/", isLoggedIn, async (req, res) => {
       composition: req.body.composition,
       form: req.body.form,
       category: req.body.category,
-      drugorvaccine: req.body.drugorvaccine,
       fornasRegistered: req.body.fornasRegistered,
       indication: req.body.indication,
       dose: req.body.dose,
@@ -106,9 +105,6 @@ router.patch("/:id", isLoggedIn, getDrugsById, async (req, res) => {
   }
   if (req.body.category != null) {
     res.drug.category = req.body.category;
-  }
-  if (req.body.drugorvaccine != null) {
-    res.drug.drugorvaccine = req.body.drugorvaccine;
   }
   if (req.body.fornasRegistered != null) {
     res.drug.fornasRegistered = req.body.fornasRegistered;

@@ -10,23 +10,11 @@ const Content = () => {
 
   const isLoggedIn = User().isLoggedIn;
 
-  function drugorvaccinedef(data: string) {
-    if (data === "vaccine") {
-      return "bg-violet-400";
-    } else {
-      return "bg-green-400";
-    }
-  }
-
   return (
     <>
       <section className="container max-w-screen-lg m-10 mx-auto text-gray">
         <div className="grid sm:grid-cols-12 text-center">
-          <div
-            className={`sm:col-span-3 rounded ${drugorvaccinedef(
-              item.drugorvaccine
-            )} flex flex-col items-center text-center m-2 p-8`}
-          >
+          <div className="sm:col-span-3 bg-green-300 rounded flex flex-col items-center text-center m-2 p-8">
             <div
               className="rounded-md bg-cover w-36 h-36"
               style={{ backgroundImage: `url(${item.img})` }}
@@ -89,25 +77,14 @@ const Content = () => {
             </div>
             <div className="w-full m-3">
               <p className="font-bold">Interactions: </p>
-              <p>{item.interactions}</p>
+              <div>
+                {item.interactions.map((interact, index) => (
+                  <p key={index}>- {interact}</p>
+                ))}
+              </div>
             </div>
           </div>
         </div>
-        {/* <div className="sm:col-span-3 md:text-left p-3">
-            <div className="w-full m-3">
-              <p className="font-bold">Contraindications: </p>
-              <p>{item.contraindication}</p>
-            </div>
-            <div className="w-full m-3">
-              <p className="font-bold">Adverse Effects: </p>
-              <p>{item.adverseEffects}</p>
-            </div>
-            <div className="w-full m-3">
-              <p className="font-bold">Interactions: </p>
-              <p>{item.interactions}</p>
-            </div>
-              </div>
-              </div> */}
         <div className="flex flex-row-reverse mt-2">
           <h6 className="italic text-gray-400">
             Last updated: {dateFormatter(item.lastUpdated)}
@@ -145,7 +122,7 @@ export const contentLoader = async ({ params }: { params: any }) => {
   return response;
 };
 
-export const actionDeleteDrug: ActionFunction = async ({ request, params }) => {
+export const actionDeleteDrug: ActionFunction = async ({ params }) => {
   const response = await fetch(
     import.meta.env.VITE_API_URL + "drugs/" + params.drugId,
     {
@@ -158,7 +135,7 @@ export const actionDeleteDrug: ActionFunction = async ({ request, params }) => {
   const data = await response.json();
 
   if (!response.ok) {
-    throw json({ message: "error" }, { status: 500 });
+    throw json({ message: data.message }, { status: 500 });
   }
 
   return redirect("/");

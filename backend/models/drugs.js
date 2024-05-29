@@ -6,7 +6,6 @@ const drugSchema = new mongoose.Schema({
   composition: { type: String, required: true },
   form: { type: String, required: true },
   category: { type: String, required: true },
-  drugorvaccine: { type: String, required: true },
   fornasRegistered: { type: Boolean },
   indication: { type: String, required: true },
   dose: { type: String, required: true },

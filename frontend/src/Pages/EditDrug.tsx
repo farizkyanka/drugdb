@@ -13,7 +13,6 @@ const EditDrug = () => {
         composition={item.composition}
         form={item.form}
         category={item.category}
-        drugorvaccine={item.drugorvaccine}
         fornasRegistered={item.fornasRegistered}
         pregnancyCategory={item.pregnancyCategory}
         lactationSafety={item.lactationSafety}

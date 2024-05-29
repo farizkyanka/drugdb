@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import Logout from "./Logout";
 import { User } from "../contexts/UserContext";
 import SearchBar from "./SearchBar";
 
