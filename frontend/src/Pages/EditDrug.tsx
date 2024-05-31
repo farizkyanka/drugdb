@@ -33,7 +33,7 @@ export const editLoader = async ({ params }: { params: any }) => {
     {
       headers: {
         "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": import.meta.env.VITE_API_URL,
+        "Access-Control-Allow-Origin": "*",
       },
     }
   );

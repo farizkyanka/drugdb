@@ -87,7 +87,7 @@ export default function FormField({
   return (
     <>
       <section className="container max-w-screen-lg m-10 mx-auto text-gray">
-        <Form method={method}>
+        <Form method={method as "POST" | "PATCH"}>
           <section className="grid sm:grid-cols-12">
             <div className="sm:col-span-3 justify-center p-3">
               <div className="flex"></div>

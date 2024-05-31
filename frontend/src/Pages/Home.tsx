@@ -42,7 +42,7 @@ export const HomeLoader = async () => {
   const response = await fetch(API + "drugs/list-drug-categories", {
     headers: {
       "Content-Type": "application/json",
-      "Access-Control-Allow-Origin": import.meta.env.VITE_API_URL,
+      "Access-Control-Allow-Origin": "*",
     },
   });
   return response;

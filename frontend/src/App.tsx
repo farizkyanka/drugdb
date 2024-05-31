@@ -2,7 +2,6 @@ import "./App.css";
 import RootLayout from "./Pages/RootLayout";
 import Home, { HomeLoader } from "./Pages/Home";
 import {
-  LoaderFunction,
   Navigate,
   RouterProvider,
   createBrowserRouter,
