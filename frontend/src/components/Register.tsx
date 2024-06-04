@@ -56,7 +56,7 @@ export async function action({ request }: any) {
   };
 
   const response = await fetch(
-    import.meta.env.VITE_API_URL + "admin/register",
+    import.meta.env.VITE_TEST_ENV + "admin/register",
     {
       method: "POST",
       headers: { "content-type": "application/json", accept: "*/*" },

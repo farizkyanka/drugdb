@@ -12,7 +12,7 @@ export const loaderLogout =
   ({ logout }: any) =>
   async () => {
     const response = await fetch(
-      import.meta.env.VITE_API_URL + "admin/logout",
+      import.meta.env.VITE_TEST_ENV + "admin/logout",
       {
         method: "DELETE",
         headers: { "content-type": "application/json", accept: "*/*" },
@@ -26,5 +26,5 @@ export const loaderLogout =
 
     logout();
 
-    return redirect("../../");
+    return redirect(".");
   };

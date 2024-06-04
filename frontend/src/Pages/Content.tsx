@@ -111,7 +111,7 @@ const Content = () => {
 
 export const contentLoader = async ({ params }: { params: any }) => {
   const response = await fetch(
-    import.meta.env.VITE_API_URL + "drugs/" + params.drugId,
+    import.meta.env.VITE_TEST_ENV + "drugs/" + params.drugId,
     {
       headers: {
         "Content-Type": "application/json",
@@ -124,7 +124,7 @@ export const contentLoader = async ({ params }: { params: any }) => {
 
 export const actionDeleteDrug: ActionFunction = async ({ params }) => {
   const response = await fetch(
-    import.meta.env.VITE_API_URL + "drugs/" + params.drugId,
+    import.meta.env.VITE_TEST_ENV + "drugs/" + params.drugId,
     {
       method: "delete",
       headers: { "content-type": "application/json" },

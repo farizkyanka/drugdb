@@ -32,7 +32,7 @@ export default function SearchResult() {
 export const searchLoader = async ({ request }: any) => {
   const category = new URL(request.url).searchParams.get("category");
   const response = await fetch(
-    import.meta.env.VITE_API_URL + "drugs/search?category=" + category,
+    import.meta.env.VITE_TEST_ENV + "drugs/search?category=" + category,
     {
       method: "GET",
       headers: {

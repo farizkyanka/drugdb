@@ -307,12 +307,12 @@ export const actionForm: ActionFunction = async ({ request, params }) => {
   };
   console.log(authData);
 
-  let url = import.meta.env.VITE_API_URL + "drugs";
+  let url = import.meta.env.VITE_TEST_ENV + "drugs";
 
   const id = params.drugId;
 
   if (method === "PATCH") {
-    url = import.meta.env.VITE_API_URL + "drugs/" + id;
+    url = import.meta.env.VITE_TEST_ENV + "drugs/" + id;
   }
 
   const response = await fetch(url, {

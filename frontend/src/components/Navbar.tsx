@@ -32,7 +32,6 @@ export default function Navbar() {
           <div className="flex grow m-2">
             <SearchBar />
           </div>
-
           <div className="flex flex-row-reverse w-1/4">
             {isLoggedIn && (
               <Link

@@ -1,11 +1,6 @@
 import { createContext, useState, useContext } from "react";
 import React from "react";
-
-type UserContextType = {
-  isLoggedIn: boolean;
-  login: () => void;
-  logout: () => void;
-};
+import type { UserContextType } from "./UserContextType";
 
 interface UserProviderType {
   children: React.ReactNode;

@@ -38,7 +38,8 @@ export default function Home() {
 }
 
 export const HomeLoader = async () => {
-  const API = import.meta.env.VITE_API_URL;
+  const API = import.meta.env.VITE_TEST_ENV;
+  console.log(API);
   const response = await fetch(API + "drugs/list-drug-categories", {
     headers: {
       "Content-Type": "application/json",

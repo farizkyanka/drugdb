@@ -42,12 +42,15 @@ export const actionLogin =
       password: data.get("password"),
     };
 
-    const response = await fetch(import.meta.env.VITE_API_URL + "admin/login", {
-      method: "POST",
-      headers: { "content-type": "application/json", accept: "*/*" },
-      credentials: "include",
-      body: JSON.stringify(authData),
-    });
+    const response = await fetch(
+      import.meta.env.VITE_TEST_ENV + "admin/login",
+      {
+        method: "POST",
+        headers: { "content-type": "application/json", accept: "*/*" },
+        credentials: "include",
+        body: JSON.stringify(authData),
+      }
+    );
 
     if (!response.ok) {
       throw json({ message: "error" }, { status: 500 });
