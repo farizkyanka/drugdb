@@ -65,7 +65,7 @@ export default function SearchBar() {
               query.length > 0 &&
               searchResult.map((data: DataModel) => {
                 return (
-                  <Link to={`/drugs/${data._id}`} key={data._id}>
+                  <Link to={`drugs/${data._id}`} key={data._id}>
                     <div
                       className="hover:bg-blue-500 hover:text-white p-1 flex"
                       onClick={() => setQuery("")}

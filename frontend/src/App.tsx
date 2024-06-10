@@ -24,7 +24,7 @@ function App() {
   const isLoggedIn = User().isLoggedIn;
   const router = createBrowserRouter([
     {
-      path: "/",
+      path: "drugdb",
 
       element: <RootLayout />,
       children: [
@@ -49,7 +49,7 @@ function App() {
           loader: searchLoader,
         },
         {
-          path: "/admin",
+          path: "admin",
           errorElement: <ErrorBoundary />,
           children: [
             {

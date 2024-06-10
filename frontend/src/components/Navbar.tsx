@@ -14,14 +14,14 @@ export default function Navbar() {
         >
           <div className="hidden md:flex flex-row w-1/4">
             <Link
-              to="/"
+              to=""
               className="mx-2 px-2 flex flex-col justify-center text-white hover:bg-cyan-600"
             >
               <h6>Home</h6>
             </Link>
             {isLoggedIn && (
               <Link
-                to="./admin/new-drug"
+                to="drugdb/admin/new-drug"
                 className="mx-2 px-2 flex text-white flex-col justify-center hover:bg-cyan-600"
               >
                 <h6>Add new drug</h6>
@@ -35,7 +35,7 @@ export default function Navbar() {
           <div className="flex flex-row-reverse w-1/4">
             {isLoggedIn && (
               <Link
-                to="./admin/logout"
+                to="drugdb/admin/logout"
                 className="mx-2 px-2 flex flex-col justify-center text-white hover:bg-cyan-600"
               >
                 <h6>Logout</h6>

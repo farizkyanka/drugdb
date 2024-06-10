@@ -26,5 +26,5 @@ export const loaderLogout =
 
     logout();
 
-    return redirect(".");
+    return redirect("./");
   };

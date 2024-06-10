@@ -33,7 +33,6 @@ export const editLoader = async ({ params }: { params: any }) => {
     {
       headers: {
         "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
       },
     }
   );

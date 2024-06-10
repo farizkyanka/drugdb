@@ -11,7 +11,7 @@ export default function SearchResult() {
           {items.map((item, index) => (
             <li key={index} className="border-2 w-full rounded-lg mb-2">
               <Link
-                to={`/drugs/${item._id}`}
+                to={`/drugdb/drugs/${item._id}`}
                 key={index}
                 className="flex flex-row items-center"
               >

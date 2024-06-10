@@ -115,7 +115,6 @@ export const contentLoader = async ({ params }: { params: any }) => {
     {
       headers: {
         "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
       },
     }
   );
@@ -138,7 +137,7 @@ export const actionDeleteDrug: ActionFunction = async ({ params }) => {
     throw json({ message: data.message }, { status: 500 });
   }
 
-  return redirect("/");
+  return redirect("/drugdb");
 };
 
 export default Content;
