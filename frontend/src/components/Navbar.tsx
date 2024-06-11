@@ -35,7 +35,7 @@ export default function Navbar() {
           <div className="flex flex-row-reverse w-1/4">
             {isLoggedIn && (
               <Link
-                to="drugdb/admin/logout"
+                to="./admin/logout"
                 className="mx-2 px-2 flex flex-col justify-center text-white hover:bg-cyan-600"
               >
                 <h6>Logout</h6>

@@ -60,7 +60,11 @@ export default function SearchBar() {
             value={query}
             onChange={(e) => handleChange(e.target.value.toString())}
           />
-          <div className="w-full absolute border border-gray-800 bg-white rounded-b">
+          <div
+            className={`${
+              searchResult.length === 0 || query.length === 0 ? "hidden" : ""
+            } w-full absolute border border-gray-800 bg-white rounded-b`}
+          >
             {query &&
               query.length > 0 &&
               searchResult.map((data: DataModel) => {

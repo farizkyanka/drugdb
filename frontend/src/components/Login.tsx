@@ -58,5 +58,5 @@ export const actionLogin =
 
     login();
 
-    return redirect("/drugdb");
+    return redirect("../../");
   };
