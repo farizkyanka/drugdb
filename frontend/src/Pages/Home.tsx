@@ -1,5 +1,6 @@
 import { useLoaderData, Link } from "react-router-dom";
 import SearchBar from "../components/SearchBar";
+import { User } from "../contexts/UserContext";
 
 export default function Home() {
   interface categories {
@@ -7,16 +8,17 @@ export default function Home() {
   }
 
   const categories = useLoaderData() as categories;
+  const isLoggedIn = User().isLoggedIn;
 
   return (
     <section className="w-screen h-screen flex-col flex bg-gradient-to-r from-blue-200 to-cyan-200 items-center justify-center">
       <div className="w-full h-6 mb-auto"></div>
       <div className="w-full text-center justify-center">
-        <h1 className="text-5xl p-4 italic font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-fuchsia-500 to-cyan-500">
+        <h1 className="text-5xl mt-auto p-4 italic font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-fuchsia-500 to-cyan-500">
           drugdb
         </h1>
       </div>
-      <div className="w-1/2 p-10">
+      <div className="w-full md:w-1/2 p-10">
         <SearchBar />
       </div>
       <div className="w-full flex justify-center">

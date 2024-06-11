@@ -2,7 +2,7 @@ import { redirect, json, Form } from "react-router-dom";
 
 export default function Logout() {
   return (
-    <Form action="/admin/logout" method="delete">
+    <Form action="./admin/logout" method="delete">
       <button>Logout</button>
     </Form>
   );
