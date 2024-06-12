@@ -24,15 +24,15 @@ const Content = () => {
               {toTitleCase(item.name)}
             </h2>
             <h3 className="w-full">
-              <span className="font-bold">Composition: </span>
+              <span className="font-bold">Komposisi: </span>
               {toTitleCase(item.composition)}
             </h3>
             <h3 className="w-full">
-              <span className="font-bold">Form: </span>
+              <span className="font-bold">Sediaan: </span>
               {item.form}
             </h3>
             <h3 className="w-full">
-              <span className="font-bold">Manufacturer: </span>
+              <span className="font-bold">Produsen: </span>
             </h3>
             <div className="flex flex-wrap justify-center">
               {item.manufacturer.map((manufacture, index) => (
@@ -46,37 +46,37 @@ const Content = () => {
             </div>
 
             <h3 className="w-full">
-              <span className="font-bold">Category: </span>
+              <span className="font-bold">Kategori: </span>
               {item.category}
             </h3>
           </div>
-          <div className="sm:col-span-9 border-y-2 border-slate-100 md:text-left p-3">
+          <div className="sm:col-span-9 border-y-2 border-slate-100 md:text-left p-4">
             <div className="m-3">
-              <p className="font-bold">Indications: </p>
+              <p className="font-bold">Indikasi: </p>
               {item.indication}
             </div>
             <div className="m-3">
-              <p className="font-bold">Dose: </p>
+              <p className="font-bold">Dosis: </p>
               {item.dose}
             </div>
             <div className="m-3">
-              <p className="font-bold">Pregnancy Safety: </p>
+              <p className="font-bold">Keamanan kehamilan: </p>
               {item.pregnancyCategory}
             </div>
             <div className="m-3">
-              <p className="font-bold">Lactation Safety:</p>
+              <p className="font-bold">Keamanan menyusui:</p>
               {item.lactationSafety}
             </div>
             <div className="w-full m-3">
-              <p className="font-bold">Contraindications: </p>
+              <p className="font-bold">Kontraindikasi: </p>
               <p>{item.contraindication}</p>
             </div>
             <div className="w-full m-3">
-              <p className="font-bold">Adverse Effects: </p>
+              <p className="font-bold">Efek samping: </p>
               <p>{item.adverseEffects}</p>
             </div>
             <div className="w-full m-3">
-              <p className="font-bold">Interactions: </p>
+              <p className="font-bold">Interaksi: </p>
               <div>
                 {item.interactions.map((interact, index) => (
                   <p key={index}>- {interact}</p>
@@ -85,7 +85,7 @@ const Content = () => {
             </div>
           </div>
         </div>
-        <div className="flex flex-row-reverse mt-2">
+        <div className="flex flex-row-reverse mt-2 mr-2">
           <h6 className="italic text-gray-400">
             Last updated: {dateFormatter(item.lastUpdated)}
           </h6>

@@ -20,7 +20,7 @@ export default function Home() {
         <SearchBar />
       </div>
       <div className="w-full flex justify-center">
-        <h1>Search by category</h1>
+        <h1>Cari berdasarkan kategori</h1>
       </div>
       <div className="container flex flex-wrap justify-center max-w-screen-xl text-center">
         {categories.categories.map((category, index) => (

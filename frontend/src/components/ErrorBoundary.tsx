@@ -6,7 +6,7 @@ export default function ErrorBoundary() {
   return (
     <div className="flex flex-wrap h-20 p-2 justify-center items-center">
       <h6 className="m-2 p-8 rounded border-4 border-red-700 bg-red-100 text-red-700 justify-center text-center">
-        {error.message} <br /> Please try again later.
+        {error.message} <br /> Mohon coba lagi nanti
       </h6>
     </div>
   );
