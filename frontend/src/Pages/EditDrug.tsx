@@ -11,8 +11,10 @@ const EditDrug = () => {
         img={item.img}
         name={item.name}
         composition={item.composition}
+        strength={item.strength}
         form={item.form}
         category={item.category}
+        classValue={item.class}
         fornasRegistered={item.fornasRegistered}
         pregnancyCategory={item.pregnancyCategory}
         lactationSafety={item.lactationSafety}

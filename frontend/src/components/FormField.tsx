@@ -9,9 +9,11 @@ export default function FormField({
   img = "",
   name = "",
   composition = "",
+  strength = [],
   form = "",
   category = "",
-  fornasRegistered = false,
+  classValue = "",
+  fornasRegistered = [] as string[],
   pregnancyCategory = "",
   lactationSafety = "",
   manufacturer = [],
@@ -32,6 +34,31 @@ export default function FormField({
   const handleImgSubmit = (e: FormEvent) => {
     e.preventDefault();
     setFramedImg(imgString);
+  };
+
+  const [stre, setStre] = useState(strength);
+  const [strString, setStrString] = useState("");
+
+  const handleStrChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    setStrString(e.target.value);
+  };
+
+  const deleteStrItem = async (index: number) => {
+    const newArray = [...stre];
+    newArray.splice(index, 1);
+    setStre(newArray);
+  };
+
+  const handleStrSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    if (strString.length === 0) {
+      return;
+    } else {
+      const newArray = [...stre, strString];
+      setStre(newArray as never[]);
+      setStrString("");
+    }
   };
 
   const [mfr, setMfr] = useState(manufacturer);
@@ -97,12 +124,17 @@ export default function FormField({
                   type="text"
                   name="img"
                   onChange={(e) => handleFramedImg(e)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      handleImgSubmit(e);
+                    }
+                  }}
                   defaultValue={img}
                   placeholder="insert image URL"
                   className="w-3/4 h-12 rounded border-2 p-3 mb-2"
                 />
                 <button
-                  onClick={(e) => handleImgSubmit(e)}
+                  onClick={handleImgSubmit}
                   className="w-1/4 h-12 text-xs rounded bg-green-200"
                 >
                   Add
@@ -124,6 +156,43 @@ export default function FormField({
                 className="w-full rounded border-2 p-1 mb-2"
                 required
               />
+              <div className="flex flex-col rounded border-2 mb-2">
+                <h6 className="font-bold text-center my-1">Strength: </h6>
+                <ul className="text-center">
+                  {stre.map((str, index) => (
+                    <input
+                      className="bg-blue-400 text-center m-2 px-2 rounded text-white hover:bg-red-600 cursor-pointer"
+                      type="text"
+                      key={index}
+                      name="strength"
+                      value={str}
+                      size={17}
+                      onClick={() => {
+                        deleteStrItem(index);
+                      }}
+                      readOnly={true}
+                    />
+                  ))}
+                </ul>
+                <input
+                  type="text"
+                  onChange={(e) => handleStrChange(e)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      handleStrSubmit(e);
+                    }
+                  }}
+                  value={strString}
+                  placeholder="Type strength here"
+                  className="w-full border-2 p-1 mb-2"
+                />
+                <button
+                  onClick={handleStrSubmit}
+                  className="p-3 rounded bg-green-200"
+                >
+                  Add
+                </button>
+              </div>
               <h6 className="font-bold">Form: </h6>
               <select
                 name="form"
@@ -151,6 +220,14 @@ export default function FormField({
                 className="w-full rounded border-2 p-1 mb-2"
                 required
               />
+              <h6 className="font-bold">Class: </h6>
+              <input
+                type="text"
+                name="class"
+                defaultValue={classValue}
+                className="w-full rounded border-2 p-1 mb-2"
+                required
+              />
               <div className="flex flex-col rounded border-2 mb-2">
                 <h6 className="font-bold text-center my-1">Manufacturer: </h6>
                 <ul className="text-center">
@@ -172,24 +249,56 @@ export default function FormField({
                 <input
                   type="text"
                   onChange={(e) => handleMfrChange(e)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      handleMfrSubmit(e);
+                    }
+                  }}
                   value={mfrString}
                   placeholder="Type manufacturer here"
                   className="w-full border-2 p-1 mb-2"
                 />
                 <button
-                  onClick={(e) => handleMfrSubmit(e)}
+                  onClick={handleMfrSubmit}
                   className="p-3 rounded bg-green-200"
                 >
                   Add
                 </button>
               </div>
-              <p className="font-bold inline">Fornas Registered: </p>
-              <input
-                type="checkbox"
-                name="fornasRegistered"
-                className="inline border-2 p-1 mb-2 w-6 h-6"
-                defaultChecked={fornasRegistered}
-              />
+              <h6 className="font-bold inline">Fornas Registered: </h6>
+              <div>
+                <input
+                  type="checkbox"
+                  name="fornas"
+                  value="FKTP"
+                  defaultChecked={
+                    fornasRegistered.includes("FKTP") ? true : false
+                  }
+                />
+                <label className="ml-2">FKTP</label>
+              </div>
+              <div>
+                <input
+                  type="checkbox"
+                  name="fornas"
+                  value="FKRTL"
+                  defaultChecked={
+                    fornasRegistered.includes("FKRTL") ? true : false
+                  }
+                />
+                <label className="ml-2">FKRTL</label>
+              </div>
+              <div>
+                <input
+                  type="checkbox"
+                  name="fornas"
+                  value="PRB"
+                  defaultChecked={
+                    fornasRegistered.includes("PRB") ? true : false
+                  }
+                />
+                <label className="ml-2">PRB</label>
+              </div>
             </div>
             <div className="sm:col-span-9 md:text-left p-3 border-y">
               <h6 className="font-bold">Indications: </h6>
@@ -260,6 +369,11 @@ export default function FormField({
               <input
                 type="text"
                 onChange={(e) => handleInteractChange(e)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    handleInteractSubmit(e);
+                  }
+                }}
                 value={interactString}
                 placeholder="Type interaction here"
                 className="border-2 p-1 mb-2 w-11/12 h-12"
@@ -293,9 +407,11 @@ export const actionForm: ActionFunction = async ({ request, params }) => {
     img: data.get("img"),
     name: toTitleCase(data.get("name") as string),
     composition: data.get("composition"),
+    strength: data.getAll("strength"),
     form: data.get("form"),
     category: data.get("category"),
-    fornasRegistered: data.get("fornasRegistered") ? true : false,
+    class: data.get("class"),
+    fornasRegistered: data.getAll("fornas"),
     pregnancyCategory: data.get("pregnancyCategory"),
     lactationSafety: data.get("lactationSafety"),
     manufacturer: data.getAll("manufacturers"),
@@ -306,7 +422,6 @@ export const actionForm: ActionFunction = async ({ request, params }) => {
     interactions: data.getAll("interactions"),
   };
   console.log(authData);
-
   let url = import.meta.env.VITE_TEST_ENV + "drugs";
 
   const id = params.drugId;
@@ -328,6 +443,6 @@ export const actionForm: ActionFunction = async ({ request, params }) => {
       { status: responseData.status }
     );
   } else {
-    return redirect("/drugs/" + responseData._id);
+    return redirect("../../drugs/" + responseData._id);
   }
 };

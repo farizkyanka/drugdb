@@ -2,6 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const dbConnect = require("./dbConnect");
 const session = require("express-session");
+const MongoStore = require("connect-mongo");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const Admin = require("./models/admin");
@@ -19,6 +20,7 @@ app.use(cors({ origin: process.env.CORS_ORIGIN_URL, credentials: true }));
 
 const sessionConfig = {
   secret: process.env.APP_SECRET,
+  store: MongoStore.create({ mongoUrl: process.env.DATABASE_URL }),
   resave: true,
   saveUninitialized: true,
   cookie: {

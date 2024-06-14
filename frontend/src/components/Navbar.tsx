@@ -1,17 +1,17 @@
-import { Link } from "react-router-dom";
 import { User } from "../contexts/UserContext";
 import SearchBar from "./SearchBar";
+import { HomeLink, NewDrugLink, LogoutLink } from "./Links";
 import { useState } from "react";
-import { MdOutlineClose } from "react-icons/md";
-import { GiHamburgerMenu } from "react-icons/gi";
+import { RxHamburgerMenu } from "react-icons/rx";
+import { IoMdClose } from "react-icons/io";
 
 export default function Navbar() {
   const isLoggedIn = User().isLoggedIn;
 
-  const [navButtonOpen, setNavButtonOpen] = useState(false);
-  function handleNavButton(e: any) {
-    setNavButtonOpen(!navButtonOpen);
-  }
+  const [isNavbarOpen, setIsNavbarOpen] = useState(false);
+
+  const handleNavbarClick = (e: any) => setIsNavbarOpen(!isNavbarOpen);
+
   return (
     <>
       <header className="w-full text-sm dark:bg-gray-800">
@@ -19,83 +19,45 @@ export default function Navbar() {
           className="container flex justify-around max-w-screen-lg mx-auto md:px-4"
           aria-label="Global"
         >
-          <div className="hidden md:flex flex-row w-1/4">
-            <Link
-              to=""
-              className="mx-2 px-2 flex flex-col justify-center text-white hover:bg-cyan-600"
-            >
-              <h6>Home</h6>
-            </Link>
-            {isLoggedIn && (
-              <Link
-                to="drugdb/admin/new-drug"
-                className="mx-2 px-2 flex text-white flex-col justify-center hover:bg-cyan-600"
-              >
-                <h6>Add new drug</h6>
-              </Link>
-            )}
+          <div className="hidden md:flex">
+            <HomeLink />
           </div>
           {isLoggedIn ? (
-            <button
-              className="md:hidden m-2 w-20 flex justify-center items-center rounded-xl bg-slate-500"
-              onClick={handleNavButton}
+            <div
+              className="m-2 w-16 flex md:hidden justify-center items-center rounded-md text-slate-200 bg-slate-600"
+              onClick={handleNavbarClick}
             >
-              {navButtonOpen ? <MdOutlineClose /> : <GiHamburgerMenu />}
-            </button>
+              {isNavbarOpen ? <IoMdClose /> : <RxHamburgerMenu />}
+            </div>
           ) : (
-            <Link
-              to=""
-              className="md:hidden mx-2 px-2 flex flex-col justify-center text-white hover:bg-cyan-600"
-            >
-              <h6>Home</h6>
-            </Link>
+            <div className="m-2 md:hidden rounded bg-slate-600 flex">
+              <HomeLink />
+            </div>
           )}
+          <div className="hidden md:flex flex-row w-1/4">
+            {isLoggedIn && <NewDrugLink />}
+          </div>
           <div className="flex grow m-2">
             <SearchBar />
           </div>
           <div className="hidden md:flex flex-row-reverse w-1/4">
-            {isLoggedIn && (
-              <Link
-                to="drugdb/admin/logout"
-                className="mx-2 px-2 flex flex-col justify-center text-white hover:bg-cyan-600"
-              >
-                <h6 onClick={handleNavButton}>Logout</h6>
-              </Link>
-            )}
+            {isLoggedIn && <LogoutLink />}
           </div>
         </nav>
       </header>
       <ul
         className={`${
-          navButtonOpen ? "" : "hidden"
-        } w-full p-1 bg-slate-800 absolute z-10`}
+          isNavbarOpen ? "" : "hidden"
+        } w-full absolute bg-slate-800 z-10`}
       >
-        <li>
-          <Link
-            to=""
-            className="m-4 flex flex-col justify-center text-white hover:bg-cyan-600"
-            onClick={handleNavButton}
-          >
-            <h6>Home</h6>
-          </Link>
-          {isLoggedIn && (
-            <Link
-              to="./admin/new-drug"
-              className="m-4 flex text-white flex-col justify-center hover:bg-cyan-600"
-              onClick={handleNavButton}
-            >
-              <h6>Add new drug</h6>
-            </Link>
-          )}
-          {isLoggedIn && (
-            <Link
-              to="./admin/logout"
-              className="m-4 flex flex-col justify-center text-white hover:bg-cyan-600"
-              onClick={handleNavButton}
-            >
-              <h6>Logout</h6>
-            </Link>
-          )}
+        <li className="my-4" onClick={handleNavbarClick}>
+          <HomeLink />
+        </li>
+        <li className="my-4" onClick={handleNavbarClick}>
+          <NewDrugLink />
+        </li>
+        <li className="my-4" onClick={handleNavbarClick}>
+          <LogoutLink />
         </li>
       </ul>
     </>

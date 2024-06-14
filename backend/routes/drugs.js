@@ -63,8 +63,10 @@ router.post("/", isLoggedIn, async (req, res) => {
       name: req.body.name,
       img: req.body.img,
       composition: req.body.composition,
+      strength: req.body.strength,
       form: req.body.form,
       category: req.body.category,
+      class: req.body.class,
       fornasRegistered: req.body.fornasRegistered,
       indication: req.body.indication,
       dose: req.body.dose,
@@ -100,11 +102,17 @@ router.patch("/:id", isLoggedIn, getDrugsById, async (req, res) => {
   if (req.body.composition != null) {
     res.drug.composition = req.body.composition;
   }
+  if (req.body.strength != null) {
+    res.drug.strength = req.body.strength;
+  }
   if (req.body.form != null) {
     res.drug.form = req.body.form;
   }
   if (req.body.category != null) {
     res.drug.category = req.body.category;
+  }
+  if (req.body.class != null) {
+    res.drug.class = req.body.class;
   }
   if (req.body.fornasRegistered != null) {
     res.drug.fornasRegistered = req.body.fornasRegistered;
@@ -158,7 +166,6 @@ router.delete("/:id", isLoggedIn, getDrugsById, async (req, res) => {
 async function getDrugsById(req, res, next) {
   try {
     const drug = await Drug.findById(req.params.id);
-    console.log(drug);
     if (drug == null) {
       return res.status(404).json({ message: "drug not found" });
     }
