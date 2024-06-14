@@ -3,10 +3,11 @@ export default interface DataModel {
   img: string;
   name: string;
   composition: string;
+  strength: [];
   form: string;
   category: string;
-  drugorvaccine: string;
-  fornasRegistered: boolean;
+  class: string;
+  fornasRegistered: [];
   pregnancyCategory: string;
   lactationSafety: string;
   manufacturer: [];

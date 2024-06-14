@@ -4,6 +4,7 @@ import type { ActionFunction } from "react-router-dom";
 import { User } from "../contexts/UserContext";
 import dateFormatter from "../util/dateFormatter";
 import toTitleCase from "../util/toTitleCase";
+import { MdVerified } from "react-icons/md";
 
 const Content = () => {
   const item = useLoaderData() as DataModel;
@@ -14,18 +15,30 @@ const Content = () => {
     <>
       <section className="container max-w-screen-lg m-10 mx-auto text-gray">
         <div className="grid sm:grid-cols-12 text-center">
-          <div className="sm:col-span-3 bg-green-300 rounded flex flex-col items-center text-center m-2 p-8">
+          <div className="sm:col-span-3 bg-green-300 rounded flex flex-col items-center text-center m-2 p-6">
             <div
               className="rounded-md bg-cover w-36 h-36"
               style={{ backgroundImage: `url(${item.img})` }}
             ></div>
-            {/* <img src={item.img} className="w-full" /> */}
             <h2 className="w-full my-3 font-bold text-lg">
               {toTitleCase(item.name)}
             </h2>
             <h3 className="w-full">
               <span className="font-bold">Komposisi: </span>
               {toTitleCase(item.composition)}
+            </h3>
+            <h3 className="w-full">
+              <span className="font-bold">Kekuatan: </span>
+              <div className="flex flex-wrap justify-center">
+                {item.strength.map((str, index) => (
+                  <span
+                    key={index}
+                    className="bg-blue-400 justify-center inline m-2 px-2 rounded text-white"
+                  >
+                    {str}
+                  </span>
+                ))}
+              </div>
             </h3>
             <h3 className="w-full">
               <span className="font-bold">Sediaan: </span>
@@ -48,6 +61,27 @@ const Content = () => {
             <h3 className="w-full">
               <span className="font-bold">Kategori: </span>
               {item.category}
+            </h3>
+            <h3 className="w-full">
+              <span className="font-bold">Kelas: </span>
+              {item.class}
+            </h3>
+            <h3 className="w-full">
+              <div className="flex flex-wrap justify-center items-center mt-4">
+                {item.fornasRegistered.length > 0 ? (
+                  <>
+                    Fornas <MdVerified className="text-green ml-2" />
+                  </>
+                ) : null}
+                {item.fornasRegistered.map((fornas, index) => (
+                  <div
+                    className="w-full bg-orange-600 justify-center inline m-2 px-2 rounded text-white"
+                    key={index}
+                  >
+                    {fornas}
+                  </div>
+                ))}
+              </div>
             </h3>
           </div>
           <div className="sm:col-span-9 border-y-2 border-slate-100 md:text-left p-4">
@@ -137,7 +171,7 @@ export const actionDeleteDrug: ActionFunction = async ({ params }) => {
     throw json({ message: data.message }, { status: 500 });
   }
 
-  return redirect("/drugdb");
+  return redirect("./");
 };
 
 export default Content;
