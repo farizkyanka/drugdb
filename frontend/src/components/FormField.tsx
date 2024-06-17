@@ -1,8 +1,9 @@
-import { json, redirect, Form } from "react-router-dom";
+import { json, redirect, Form, useNavigation } from "react-router-dom";
 import { ActionFunction } from "react-router-dom";
 import { FormEvent, useState } from "react";
 import { FaRegWindowClose } from "react-icons/fa";
 import toTitleCase from "../util/toTitleCase";
+import { PiSpinnerBold } from "react-icons/pi";
 
 export default function FormField({
   method = "POST",
@@ -110,6 +111,8 @@ export default function FormField({
       setInteractString("");
     }
   };
+
+  const navigation = useNavigation();
 
   return (
     <>
@@ -388,8 +391,19 @@ export default function FormField({
           </section>
           <section className="grid-cols-12">
             <div className="flex justify-center mt-4">
-              <button className="w-1/2 p-2 rounded bg-slate-400 ">
-                Submit
+              <button
+                disabled={navigation.state === "submitting" ? true : false}
+                className={`${
+                  navigation.state === "submitting" ? "disabled:opacity-70" : ""
+                } w-1/2 p-2 rounded bg-slate-400`}
+              >
+                {navigation.state === "submitting" ? (
+                  <span>
+                    Submitting... <PiSpinnerBold className="inline" />
+                  </span>
+                ) : (
+                  "Submit"
+                )}
               </button>
             </div>
           </section>
