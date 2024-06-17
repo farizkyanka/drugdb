@@ -4,13 +4,16 @@ import { HomeLink, NewDrugLink, LogoutLink } from "./Links";
 import { useState } from "react";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { IoMdClose } from "react-icons/io";
+import { useNavigation } from "react-router-dom";
+import { PiSpinnerBold } from "react-icons/pi";
 
 export default function Navbar() {
   const isLoggedIn = User().isLoggedIn;
+  const navigation = useNavigation();
 
   const [isNavbarOpen, setIsNavbarOpen] = useState(false);
 
-  const handleNavbarClick = (e: any) => setIsNavbarOpen(!isNavbarOpen);
+  const handleNavbarClick = () => setIsNavbarOpen(!isNavbarOpen);
 
   return (
     <>
@@ -39,6 +42,11 @@ export default function Navbar() {
           </div>
           <div className="flex grow m-2">
             <SearchBar />
+          </div>
+          <div className="flex items-center">
+            {navigation.state === "loading" ? (
+              <PiSpinnerBold color="white" size={"2em"} />
+            ) : null}
           </div>
           <div className="hidden md:flex flex-row-reverse w-1/4">
             {isLoggedIn && <LogoutLink />}
