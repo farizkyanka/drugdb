@@ -23,6 +23,7 @@ export default function FormField({
   contraindication = "",
   adverseEffects = "",
   interactions = [],
+  references = [],
 }) {
   const [framedImg, setFramedImg] = useState(img);
   const [imgString, setImgString] = useState("");
@@ -109,6 +110,31 @@ export default function FormField({
       const newArray = [...interact, interactString] as string[];
       setInteract(newArray as never[]);
       setInteractString("");
+    }
+  };
+
+  const [refer, setRefer] = useState(references);
+  const [refString, setRefString] = useState("");
+
+  const handleRefChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    setRefString(e.target.value);
+  };
+
+  const deleteRefItem = async (index: number) => {
+    const newArray = [...refer];
+    newArray.splice(index, 1);
+    setRefer(newArray);
+  };
+
+  const handleRefSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    if (refString.length === 0) {
+      return;
+    } else {
+      const newArray = [...refer, refString];
+      setRefer(newArray as never[]);
+      setRefString("");
     }
   };
 
@@ -390,6 +416,59 @@ export default function FormField({
             </div>
           </section>
           <section className="grid-cols-12">
+            <div>
+              <h1>References:</h1>
+              <ul className="text-center">
+                {refer.map((i, index) => (
+                  // <input
+                  //   className="bg-blue-400 m-2 px-2cursor-pointer"
+                  //   type="text"
+                  //   key={index}
+                  //   name="strength"
+                  //   value={i}
+                  //   onClick={() => {
+                  //     deleteRefItem(index);
+                  //   }}
+                  //   readOnly={true}
+                  // />
+                  <div
+                    key={index}
+                    className="flex flex-wrap my-2 w-full items-center rounded border-2"
+                  >
+                    <textarea
+                      className="m-2 px-2 bg-none w-11/12"
+                      name="references"
+                      value={`${i}`}
+                      readOnly={true}
+                    />
+                    <FaRegWindowClose
+                      className="hover:bg-red-600 rounded hover:text-white cursor-pointer w-6 h-6"
+                      onClick={() => {
+                        deleteRefItem(index);
+                      }}
+                    />
+                  </div>
+                ))}
+              </ul>
+              <input
+                type="text"
+                onChange={(e) => handleRefChange(e)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    handleRefSubmit(e);
+                  }
+                }}
+                value={refString}
+                placeholder="Type references here"
+                className="w-full border-2 p-1 mb-2"
+              />
+              <button
+                onClick={handleRefSubmit}
+                className="p-3 rounded bg-green-200"
+              >
+                Add
+              </button>
+            </div>
             <div className="flex justify-center mt-4">
               <button
                 disabled={navigation.state === "submitting" ? true : false}
@@ -434,6 +513,7 @@ export const actionForm: ActionFunction = async ({ request, params }) => {
     contraindication: data.get("contraindication"),
     adverseEffects: data.get("adverseEffects"),
     interactions: data.getAll("interactions"),
+    references: data.getAll("references"),
   };
   console.log(authData);
   let url = import.meta.env.VITE_TEST_ENV + "drugs";

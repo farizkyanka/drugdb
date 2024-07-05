@@ -38,7 +38,7 @@ router.get("/search", async (req, res) => {
       const searchQuery = req.query.prompt.trim().toLowerCase();
       searchResult = await Drug.find({
         $or: [
-          { name: { $regex: searchQuery } },
+          { name: { $regex: searchQuery, $options: "i" } },
           { composition: { $regex: searchQuery } },
           { indication: { $regex: searchQuery } },
         ],
@@ -76,6 +76,7 @@ router.post("/", isLoggedIn, async (req, res) => {
       lactationSafety: req.body.lactationSafety,
       interactions: req.body.interactions,
       adverseEffects: req.body.adverseEffects,
+      references: req.body.references,
       lastUpdated: new Date(),
     });
     try {
@@ -140,6 +141,9 @@ router.patch("/:id", isLoggedIn, getDrugsById, async (req, res) => {
   }
   if (req.body.adverseEffects != null) {
     res.drug.adverseEffects = req.body.adverseEffects;
+  }
+  if (req.body.references != null) {
+    res.drug.references = req.body.references;
   }
   res.drug.lastUpdated = new Date();
   try {

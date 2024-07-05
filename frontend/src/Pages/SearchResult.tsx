@@ -15,7 +15,10 @@ export default function SearchResult() {
                 key={index}
                 className="flex flex-row items-center"
               >
-                <img src={item.img} className="mr-2 w-20 rounded-lg" />
+                <div
+                  className="rounded-md bg-contain bg-no-repeat bg-center w-20 h-20"
+                  style={{ backgroundImage: `url(${item.img})` }}
+                ></div>
                 <div className="flex flex-col">
                   <h1 className="font-bold">{item.name}</h1>
                   <h2>{item.category}</h2>

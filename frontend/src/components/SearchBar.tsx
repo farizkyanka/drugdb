@@ -59,6 +59,11 @@ export default function SearchBar() {
             placeholder="Cari"
             value={query}
             onChange={(e) => handleChange(e.target.value.toString())}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                e.preventDefault();
+              }
+            }}
           />
           <div
             className={`${
@@ -74,11 +79,11 @@ export default function SearchBar() {
                       className="hover:bg-blue-500 hover:text-white p-1 flex"
                       onClick={() => setQuery("")}
                     >
-                      <img
-                        src={data.img}
-                        className="max-w-10 max-h-10 display-inline rounded"
-                      />
-                      <h6 className="m-1">{data.name}</h6>
+                      <div
+                        className="rounded-md bg-cover bg-center w-10 h-10"
+                        style={{ backgroundImage: `url(${data.img})` }}
+                      ></div>
+                      <h6 className="ml-4 mt-1">{data.name}</h6>
                     </div>
                   </Link>
                 );

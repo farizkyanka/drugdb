@@ -22,7 +22,7 @@ export default function Home() {
       <div className="w-full flex justify-center">
         <h1>Cari berdasarkan kategori</h1>
       </div>
-      <div className="container flex flex-wrap justify-center max-w-screen-xl text-center">
+      <div className="container flex flex-wrap justify-center max-w-screen-xl text-center overflow-x-auto">
         {categories.categories.map((category, index) => (
           <Link to={`drugs/searchresult?category=` + category} key={index}>
             <div

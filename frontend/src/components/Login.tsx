@@ -54,6 +54,9 @@ export const actionLogin =
 
     if (!response.ok) {
       throw json({ message: "error" }, { status: 500 });
+    } else {
+      const data = await response.json();
+      console.log(data);
     }
 
     login();

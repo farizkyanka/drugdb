@@ -17,7 +17,7 @@ const Content = () => {
         <div className="grid sm:grid-cols-12 text-center">
           <div className="sm:col-span-3 bg-green-300 rounded flex flex-col items-center text-center m-2 p-6">
             <div
-              className="rounded-md bg-cover w-36 h-36"
+              className="rounded-md bg-cover bg-center w-36 h-36"
               style={{ backgroundImage: `url(${item.img})` }}
             ></div>
             <h2 className="w-full my-3 font-bold text-lg">
@@ -85,27 +85,27 @@ const Content = () => {
             </h3>
           </div>
           <div className="sm:col-span-9 border-y-2 border-slate-100 md:text-left p-4">
-            <div className="m-3">
+            <div className="m-3 whitespace-pre-line">
               <p className="font-bold">Indikasi: </p>
               {item.indication}
             </div>
-            <div className="m-3">
+            <div className="m-3 whitespace-pre-line">
               <p className="font-bold">Dosis: </p>
               {item.dose}
             </div>
-            <div className="m-3">
+            <div className="m-3 whitespace-pre-line">
               <p className="font-bold">Keamanan kehamilan: </p>
               {item.pregnancyCategory}
             </div>
-            <div className="m-3">
+            <div className="m-3 whitespace-pre-line">
               <p className="font-bold">Keamanan menyusui:</p>
               {item.lactationSafety}
             </div>
-            <div className="w-full m-3">
+            <div className="w-full m-3 whitespace-pre-line">
               <p className="font-bold">Kontraindikasi: </p>
               <p>{item.contraindication}</p>
             </div>
-            <div className="w-full m-3">
+            <div className="w-full m-3 whitespace-pre-line">
               <p className="font-bold">Efek samping: </p>
               <p>{item.adverseEffects}</p>
             </div>
@@ -118,6 +118,12 @@ const Content = () => {
               </div>
             </div>
           </div>
+        </div>
+        <div className="p-4">
+          <h3 className="font-bold text-2xl">Referensi</h3>
+          {item.references.map((i, index) => (
+            <p key={index}>{`${index + 1}. ${i}`}</p>
+          ))}
         </div>
         <div className="flex flex-row-reverse mt-2 mr-2">
           <h6 className="italic text-gray-400">
