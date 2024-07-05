@@ -17,4 +17,5 @@ export default interface DataModel {
   adverseEffects: string;
   interactions: [];
   lastUpdated: string;
+  references: [];
 }

@@ -17,6 +17,7 @@ const drugSchema = new mongoose.Schema({
   lactationSafety: { type: String, required: true },
   interactions: { type: Array, required: false },
   adverseEffects: { type: String, required: true },
+  references: { type: Array },
   lastUpdated: { type: Date, required: true },
 });
 

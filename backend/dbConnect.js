@@ -12,6 +12,9 @@ const dbConnect = () => {
   mongoose.connection.on("disconnected", () => {
     console.log("mongodb connection disrupted");
   });
+  mongoose.connection.on("reconnected", () => {
+    console.log("mongodb connection resumed");
+  });
 };
 
 module.exports = dbConnect;
