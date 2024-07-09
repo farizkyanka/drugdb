@@ -28,6 +28,7 @@ app.use(
 
 const sessionConfig = {
   secret: process.env.APP_SECRET,
+  proxy: true,
   store: MongoStore.create({ mongoUrl: process.env.DATABASE_URL }),
   resave: true,
   saveUninitialized: true,
