@@ -35,7 +35,7 @@ const sessionConfig = {
     httpOnly: true,
     expires: Date.now() + 1000 * 60 * 60 * 24,
     maxAge: 1000 * 60 * 60 * 24,
-    sameSite: process.env.NODE_ENV === "development" ? "Lax" : "None",
+    sameSite: "Lax",
     secure: process.env.NODE_ENV === "development" ? false : true,
   },
 };

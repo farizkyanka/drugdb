@@ -33,7 +33,7 @@ export default function Login() {
   );
 }
 
-export const actionLogin: ActionFunction = async ({ request, params }) => {
+export const actionLogin: ActionFunction = async ({ request }) => {
   const data = await request.formData();
   const authData = {
     username: data.get("username"),

@@ -2,7 +2,7 @@ import "./App.css";
 import RootLayout from "./Pages/RootLayout";
 import Home, { HomeLoader } from "./Pages/Home";
 import {
-  Navigate,
+  LoaderFunction,
   RouterProvider,
   createBrowserRouter,
 } from "react-router-dom";
@@ -16,7 +16,7 @@ import Logout, { actionLogout } from "./components/Logout";
 import SearchResult, { searchLoader } from "./Pages/SearchResult";
 import Register, { action as actionRegister } from "./components/Register";
 import ErrorBoundary from "./components/ErrorBoundary";
-import { checkAuth } from "./util/auth";
+import { checkAuth, routeProtectionCheck } from "./util/auth";
 
 function App() {
   const router = createBrowserRouter([
@@ -58,20 +58,13 @@ function App() {
             { path: "logout", action: actionLogout, element: <Logout /> },
             {
               path: "new-drug",
-              element: localStorage.getItem("userProfile") ? (
-                <NewDrug />
-              ) : (
-                <Navigate to="../login" />
-              ),
+              element: <NewDrug />,
               action: actionForm,
+              loader: routeProtectionCheck as LoaderFunction,
             },
             {
               path: "edit-drug/:drugId",
-              element: localStorage.getItem("userProfile") ? (
-                <EditDrug />
-              ) : (
-                <Navigate to="../login" />
-              ),
+              element: <EditDrug />,
               loader: editLoader,
               action: actionForm,
             },
