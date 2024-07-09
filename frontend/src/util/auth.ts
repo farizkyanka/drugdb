@@ -1,11 +1,8 @@
-import { redirect } from "react-router-dom";
-import { User } from "../contexts/UserContext";
+export function checkAuth() {
+  const userProfile = localStorage.getItem("userProfile");
+  return userProfile;
+}
 
-export function checkAuthLoader() {
-const isLoggedIn = User().isLoggedIn
-
-    if(!isLoggedIn) {
-        return redirect('/admin/login')
-    }
-    return 
+export function authLoader() {
+  return checkAuth();
 }

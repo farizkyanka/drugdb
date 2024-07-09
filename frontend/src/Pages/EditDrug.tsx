@@ -24,6 +24,7 @@ const EditDrug = () => {
         contraindication={item.contraindication}
         adverseEffects={item.adverseEffects}
         interactions={item.interactions}
+        references={item.references}
       />
     </>
   );

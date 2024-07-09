@@ -12,20 +12,18 @@ import NewDrug from "./Pages/NewDrug";
 import EditDrug, { editLoader } from "./Pages/EditDrug";
 import { actionForm } from "./components/FormField";
 import ErrorPage from "./Pages/ErrorPage";
-import { loaderLogout } from "./components/Logout";
-import { User } from "./contexts/UserContext";
+import Logout, { actionLogout } from "./components/Logout";
 import SearchResult, { searchLoader } from "./Pages/SearchResult";
 import Register, { action as actionRegister } from "./components/Register";
 import ErrorBoundary from "./components/ErrorBoundary";
+import { checkAuth } from "./util/auth";
 
 function App() {
-  const login = User().login;
-  const logout = User().logout;
-  const isLoggedIn = User().isLoggedIn;
   const router = createBrowserRouter([
     {
       path: "drugdb",
-
+      id: "root",
+      loader: checkAuth,
       element: <RootLayout />,
       children: [
         {
@@ -55,17 +53,25 @@ function App() {
             {
               path: "login",
               element: <Login />,
-              action: actionLogin({ login }),
+              action: actionLogin,
             },
-            { path: "logout", loader: loaderLogout({ logout }) },
+            { path: "logout", action: actionLogout, element: <Logout /> },
             {
               path: "new-drug",
-              element: isLoggedIn ? <NewDrug /> : <Navigate to="../login" />,
+              element: localStorage.getItem("userProfile") ? (
+                <NewDrug />
+              ) : (
+                <Navigate to="../login" />
+              ),
               action: actionForm,
             },
             {
               path: "edit-drug/:drugId",
-              element: isLoggedIn ? <EditDrug /> : <Navigate to="../login" />,
+              element: localStorage.getItem("userProfile") ? (
+                <EditDrug />
+              ) : (
+                <Navigate to="../login" />
+              ),
               loader: editLoader,
               action: actionForm,
             },

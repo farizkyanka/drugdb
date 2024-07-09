@@ -23,7 +23,12 @@ router.post(
   "/login",
   passport.authenticate("local", { failureFlash: false }),
   (req, res) => {
-    res.json({ username: req.user.username });
+    res.json({
+      id: req.user._id,
+      email: req.user.email,
+      username: req.user.username,
+      role: req.user.role,
+    });
   }
 );
 

@@ -1,4 +1,4 @@
-import { redirect, Form, json } from "react-router-dom";
+import { redirect, Form, json, ActionFunction } from "react-router-dom";
 
 export default function Login() {
   return (
@@ -33,33 +33,26 @@ export default function Login() {
   );
 }
 
-export const actionLogin =
-  ({ login }: any) =>
-  async ({ request }: any) => {
-    const data = await request.formData();
-    const authData = {
-      username: data.get("username"),
-      password: data.get("password"),
-    };
-
-    const response = await fetch(
-      import.meta.env.VITE_TEST_ENV + "admin/login",
-      {
-        method: "POST",
-        headers: { "content-type": "application/json", accept: "*/*" },
-        credentials: "include",
-        body: JSON.stringify(authData),
-      }
-    );
-
-    if (!response.ok) {
-      throw json({ message: "error" }, { status: 500 });
-    } else {
-      const data = await response.json();
-      console.log(data);
-    }
-
-    login();
-
-    return redirect("../../");
+export const actionLogin: ActionFunction = async ({ request, params }) => {
+  const data = await request.formData();
+  const authData = {
+    username: data.get("username"),
+    password: data.get("password"),
   };
+
+  const response = await fetch(import.meta.env.VITE_TEST_ENV + "admin/login", {
+    method: "POST",
+    headers: { "content-type": "application/json", accept: "*/*" },
+    credentials: "include",
+    body: JSON.stringify(authData),
+  });
+
+  if (!response.ok) {
+    throw json({ message: "error" }, { status: response.status });
+  } else {
+    const userProfile = await response.json();
+    localStorage.setItem("userProfile", JSON.stringify(userProfile));
+  }
+
+  return redirect("../../");
+};
