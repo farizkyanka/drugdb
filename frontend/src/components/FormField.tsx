@@ -187,15 +187,14 @@ export default function FormField({
               />
               <div className="flex flex-col rounded border-2 mb-2">
                 <h6 className="font-bold text-center my-1">Strength: </h6>
-                <ul className="text-center">
+                <ul className="text-center flex flex-wrap">
                   {stre.map((str, index) => (
                     <input
-                      className="bg-blue-400 text-center m-2 px-2 rounded text-white hover:bg-red-600 cursor-pointer"
+                      className="bg-blue-400 w-full text-center m-2 px-2 rounded text-white hover:bg-red-600 cursor-pointer"
                       type="text"
                       key={index}
                       name="strength"
                       value={str}
-                      size={17}
                       onClick={() => {
                         deleteStrItem(index);
                       }}
@@ -259,15 +258,14 @@ export default function FormField({
               />
               <div className="flex flex-col rounded border-2 mb-2">
                 <h6 className="font-bold text-center my-1">Manufacturer: </h6>
-                <ul className="text-center">
+                <ul className="text-center flex flex-wrap">
                   {mfr.map((manufacture, index) => (
                     <input
-                      className="bg-blue-400 text-center m-2 px-2 rounded text-white hover:bg-red-600 cursor-pointer"
+                      className="bg-blue-400 text-center w-full m-2 px-2 rounded text-white hover:bg-red-600 cursor-pointer"
                       type="text"
                       key={index}
                       name="manufacturers"
                       value={manufacture}
-                      size={17}
                       onClick={() => {
                         deleteMfrItem(index);
                       }}

@@ -16,7 +16,15 @@ const adminRouter = require("./routes/admin");
 
 dbConnect();
 
-app.use(cors({ origin: process.env.CORS_ORIGIN_URL, credentials: true }));
+app.use(
+  cors({
+    origin:
+      process.env.NODE_ENV === "development"
+        ? "http://localhost:5173"
+        : process.env.CORS_ORIGIN_URL,
+    credentials: true,
+  })
+);
 
 const sessionConfig = {
   secret: process.env.APP_SECRET,
@@ -27,6 +35,8 @@ const sessionConfig = {
     httpOnly: true,
     expires: Date.now() + 1000 * 60 * 60 * 24,
     maxAge: 1000 * 60 * 60 * 24,
+    sameSite: process.env.NODE_ENV === "development" ? "Lax" : "None",
+    secure: process.env.NODE_ENV === "development" ? false : true,
   },
 };
 

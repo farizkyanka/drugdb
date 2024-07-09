@@ -1,15 +1,20 @@
 import DataModel from "../models/DataModel";
-import { useLoaderData, Link, Form, json, redirect } from "react-router-dom";
+import {
+  useLoaderData,
+  Link,
+  Form,
+  json,
+  redirect,
+  useRouteLoaderData,
+} from "react-router-dom";
 import type { ActionFunction } from "react-router-dom";
-import { User } from "../contexts/UserContext";
 import dateFormatter from "../util/dateFormatter";
 import toTitleCase from "../util/toTitleCase";
 import { MdVerified } from "react-icons/md";
 
 const Content = () => {
   const item = useLoaderData() as DataModel;
-
-  const isLoggedIn = User().isLoggedIn;
+  const userProfile = useRouteLoaderData("root") as object;
 
   return (
     <>
@@ -101,15 +106,15 @@ const Content = () => {
               <p className="font-bold">Keamanan menyusui:</p>
               {item.lactationSafety}
             </div>
-            <div className="w-full m-3 whitespace-pre-line">
+            <div className="m-3 whitespace-pre-line">
               <p className="font-bold">Kontraindikasi: </p>
               <p>{item.contraindication}</p>
             </div>
-            <div className="w-full m-3 whitespace-pre-line">
+            <div className="m-3 whitespace-pre-line">
               <p className="font-bold">Efek samping: </p>
               <p>{item.adverseEffects}</p>
             </div>
-            <div className="w-full m-3">
+            <div className="m-3">
               <p className="font-bold">Interaksi: </p>
               <div>
                 {item.interactions.map((interact, index) => (
@@ -130,7 +135,7 @@ const Content = () => {
             Last updated: {dateFormatter(item.lastUpdated)}
           </h6>
         </div>
-        {isLoggedIn && (
+        {userProfile && (
           <div className="flex justify-evenly mt-4">
             <Link to={`../admin/edit-drug/${item._id}`}>
               <button className="rounded p-2 dark:bg-gray-800 text-white">

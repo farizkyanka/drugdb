@@ -1,15 +1,15 @@
-import { User } from "../contexts/UserContext";
 import SearchBar from "./SearchBar";
-import { HomeLink, NewDrugLink, LogoutLink } from "./Links";
+import { HomeLink, NewDrugLink } from "./Links";
 import { useState } from "react";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { IoMdClose } from "react-icons/io";
-import { useNavigation } from "react-router-dom";
+import { useNavigation, useRouteLoaderData } from "react-router-dom";
 import { PiSpinnerBold } from "react-icons/pi";
+import Logout from "./Logout";
 
 export default function Navbar() {
-  const isLoggedIn = User().isLoggedIn;
   const navigation = useNavigation();
+  const userProfile = useRouteLoaderData("root") as object;
 
   const [isNavbarOpen, setIsNavbarOpen] = useState(false);
 
@@ -25,7 +25,7 @@ export default function Navbar() {
           <div className="hidden md:flex">
             <HomeLink />
           </div>
-          {isLoggedIn ? (
+          {userProfile ? (
             <div
               className="m-2 w-16 flex md:hidden justify-center items-center rounded-md text-slate-200 bg-slate-600"
               onClick={handleNavbarClick}
@@ -33,12 +33,12 @@ export default function Navbar() {
               {isNavbarOpen ? <IoMdClose /> : <RxHamburgerMenu />}
             </div>
           ) : (
-            <div className="m-2 md:hidden rounded bg-slate-600 flex">
+            <div className="m-2 md:hidden rounded bg-slate-600  hover:bg-cyan-600 flex">
               <HomeLink />
             </div>
           )}
           <div className="hidden md:flex flex-row w-1/4">
-            {isLoggedIn && <NewDrugLink />}
+            {userProfile && <NewDrugLink />}
           </div>
           <div className="flex grow m-2">
             <SearchBar />
@@ -49,7 +49,7 @@ export default function Navbar() {
             ) : null}
           </div>
           <div className="hidden md:flex flex-row-reverse w-1/4">
-            {isLoggedIn && <LogoutLink />}
+            {userProfile && <Logout />}
           </div>
         </nav>
       </header>
@@ -65,7 +65,7 @@ export default function Navbar() {
           <NewDrugLink />
         </li>
         <li className="my-4" onClick={handleNavbarClick}>
-          <LogoutLink />
+          <Logout />
         </li>
       </ul>
     </>

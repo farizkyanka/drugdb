@@ -17,12 +17,3 @@ export const NewDrugLink = () => (
     <h6>Add new drug</h6>
   </Link>
 );
-
-export const LogoutLink = () => (
-  <Link
-    to="./admin/logout"
-    className="mx-2 px-2 flex flex-col justify-center text-white hover:bg-cyan-600"
-  >
-    <h6>Logout</h6>
-  </Link>
-);
