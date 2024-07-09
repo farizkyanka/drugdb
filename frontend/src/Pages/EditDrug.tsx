@@ -41,6 +41,9 @@ export const editLoader = async ({ params }: { params: any }) => {
       },
     }
   );
+  if (response.status === 403) {
+    localStorage.removeItem("userProfile");
+  }
   return response;
 };
 

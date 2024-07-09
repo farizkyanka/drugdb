@@ -529,6 +529,9 @@ export const actionForm: ActionFunction = async ({ request, params }) => {
     body: JSON.stringify(authData),
   });
   const responseData = await response.json();
+  if (response.status === 403) {
+    localStorage.removeItem("userProfile");
+  }
   if (!response.ok) {
     throw json(
       { message: responseData.message },

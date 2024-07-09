@@ -36,7 +36,6 @@ const sessionConfig = {
     expires: Date.now() + 1000 * 60 * 60 * 24,
     maxAge: 1000 * 60 * 60 * 24,
     sameSite: "Lax",
-    secure: process.env.NODE_ENV === "development" ? false : true,
   },
 };
 
