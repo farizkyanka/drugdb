@@ -1,9 +1,8 @@
 import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import DataModel from "../models/DataModel";
 
 export default function SearchBar() {
-  const route = useLocation().pathname;
   const [query, setQuery] = useState("");
   const [searchResult, setSearchResult] = useState([]);
 
