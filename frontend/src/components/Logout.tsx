@@ -3,7 +3,7 @@ import { redirect, json, Form } from "react-router-dom";
 export default function Logout() {
   return (
     <Form action="./admin/logout" method="delete">
-      <button className="px-2 h-full w-full flex flex-col justify-center text-white hover:bg-cyan-600">
+      <button className="px-2 mx-2 h-full w-full flex flex-col justify-center  hover:bg-cyan-600">
         Logout
       </button>
     </Form>
@@ -23,5 +23,5 @@ export const actionLogout = async () => {
     localStorage.clear();
   }
 
-  return redirect("../../");
+  return redirect("../..");
 };

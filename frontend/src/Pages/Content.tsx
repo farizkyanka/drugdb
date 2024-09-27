@@ -18,7 +18,7 @@ const Content = () => {
 
   return (
     <>
-      <section className="container max-w-screen-lg m-10 mx-auto text-gray">
+      <section className="container max-w-screen-lg py-4 mx-auto text-gray">
         <div className="grid sm:grid-cols-12 text-center">
           <div className="sm:col-span-3 bg-green-300 rounded flex flex-col items-center text-center m-2 p-6">
             <div
@@ -90,27 +90,27 @@ const Content = () => {
             </h3>
           </div>
           <div className="sm:col-span-9 border-y-2 border-slate-100 md:text-left p-4">
-            <div className="m-3 whitespace-pre-line">
+            <div className="m-3 whitespace-pre-line text-justify">
               <p className="font-bold">Indikasi: </p>
               {item.indication}
             </div>
-            <div className="m-3 whitespace-pre-line">
+            <div className="m-3 whitespace-pre-line text-justify">
               <p className="font-bold">Dosis: </p>
               {item.dose}
             </div>
-            <div className="m-3 whitespace-pre-line">
+            <div className="m-3 whitespace-pre-line text-justify">
               <p className="font-bold">Keamanan kehamilan: </p>
               {item.pregnancyCategory}
             </div>
-            <div className="m-3 whitespace-pre-line">
+            <div className="m-3 whitespace-pre-line text-justify">
               <p className="font-bold">Keamanan menyusui:</p>
               {item.lactationSafety}
             </div>
-            <div className="m-3 whitespace-pre-line">
+            <div className="m-3 whitespace-pre-line text-justify">
               <p className="font-bold">Kontraindikasi: </p>
               <p>{item.contraindication}</p>
             </div>
-            <div className="m-3 whitespace-pre-line">
+            <div className="m-3 whitespace-pre-line text-justify">
               <p className="font-bold">Efek samping: </p>
               <p>{item.adverseEffects}</p>
             </div>

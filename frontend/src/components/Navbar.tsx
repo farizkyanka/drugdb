@@ -19,7 +19,7 @@ export default function Navbar() {
     <>
       <header className="w-full text-sm dark:bg-gray-800">
         <nav
-          className="container flex justify-around max-w-screen-lg mx-auto md:px-4"
+          className="container flex justify-around max-w-screen-lg text-white mx-auto md:px-4"
           aria-label="Global"
         >
           <div className="hidden md:flex">

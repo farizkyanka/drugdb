@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import DataModel from "../models/DataModel";
 
 export default function SearchBar() {
+  const route = useLocation().pathname;
   const [query, setQuery] = useState("");
   const [searchResult, setSearchResult] = useState([]);
 
@@ -68,7 +69,7 @@ export default function SearchBar() {
           <div
             className={`${
               searchResult.length === 0 || query.length === 0 ? "hidden" : ""
-            } w-full absolute border border-gray-800 bg-white rounded-b`}
+            } w-full absolute border border-gray-800 bg-white rounded-b z-50`}
           >
             {query &&
               query.length > 0 &&

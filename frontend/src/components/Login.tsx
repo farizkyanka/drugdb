@@ -54,5 +54,5 @@ export const actionLogin: ActionFunction = async ({ request }) => {
     localStorage.setItem("userProfile", JSON.stringify(userProfile));
   }
 
-  return redirect("../../");
+  return redirect("../..");
 };

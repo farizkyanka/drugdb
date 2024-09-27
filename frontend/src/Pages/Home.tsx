@@ -1,7 +1,10 @@
-import { useLoaderData, Link } from "react-router-dom";
+import { useLoaderData, Link, useRouteLoaderData } from "react-router-dom";
 import SearchBar from "../components/SearchBar";
+import { NewDrugLink } from "../components/Links";
+import Logout from "../components/Logout";
 
 export default function Home() {
+  const userProfile = useRouteLoaderData("root") as object;
   interface categories {
     categories: Array<string>;
   }
@@ -34,6 +37,12 @@ export default function Home() {
           </Link>
         ))}
       </div>
+      {userProfile && (
+        <div className="mt-10 p-2 rounded bg-slate-500 flex flex-row text-white">
+          <NewDrugLink />
+          <Logout />
+        </div>
+      )}
       <Link to={"./admin/login"} className="w-full h-6 mt-auto" />
     </section>
   );
